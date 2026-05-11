@@ -59,6 +59,8 @@ CFLAGS   += $(OPTFLAGS) \
             -Wno-missing-braces \
             -Werror
 
+CFLAGS += -Wno-gnu-folding-constant
+
 ifneq ($(FUZZER),1) # This can be removed once the fuzzer machine uses at least clang 16
 	CFLAGS += -ftrivial-auto-var-init=zero
 endif
@@ -140,6 +142,7 @@ OBJS   = $(SRCS:.c=.o)
 OBJS  += secp256k1-zkp.o
 OBJS  += precomputed_ecmult.o
 OBJS  += precomputed_ecmult_gen.o
+OBJS += shrincs/shrincs.o shrincs/hash.o shrincs/address.o shrincs/pors_fp.o shrincs/uxmss.o shrincs/wots_c.o shrincs/xmss.o
 
 TESTLIBS = $(shell pkg-config --libs check) -lpthread -lm
 TESTSSLLIBS = $(shell pkg-config --libs openssl)
@@ -149,7 +152,10 @@ all: tools tests
 %.o: %.c %.h options.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-tests: tests/test_check tests/test_openssl tests/test_speed tests/libtrezor-crypto.so tests/aestst
+tests: tests/test_check tests/test_openssl tests/test_speed tests/libtrezor-crypto.so tests/aestst tests/test_shrincs
+
+tests/test_shrincs: tests/test_shrincs.o $(OBJS)
+	$(CC) $(LDFLAGS) tests/test_shrincs.o $(OBJS) $(LDLIBS) -lcheck -o tests/test_shrincs
 
 tests/aestst: aes/aestst.o aes/aescrypt.o aes/aeskey.o aes/aestab.o
 	$(CC) $(CFLAGS) $^ -o $@

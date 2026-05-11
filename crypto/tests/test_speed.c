@@ -10,6 +10,7 @@
 #include "hasher.h"
 #include "nist256p1.h"
 #include "secp256k1.h"
+#include "shrincs/shrincs.h"
 
 static uint8_t msg[256];
 
@@ -186,6 +187,163 @@ void bench_ckd(int iterations) {
   }
 }
 
+uint8_t sl_signature[SL_SIZE];
+
+void bench_sign_shrincs_stateless(int iterations) {
+  SecretKey sk;
+  PublicKey pk;
+
+  memcpy(pk.seed,
+         "\xa8\xe2\x87\xad\xc1\x50\x1e\xa8\x48\xd9\xe2\x9f\xce\x04\x46\x96",
+         N);
+
+  memcpy(pk.root,
+         "\x2a\x39\x8e\xeb\x0b\x9f\x7a\xe6\x3d\x80\x0c\xfc\x44\x26\x92\x16",
+         N);
+
+  sk.pk = pk;
+
+  memcpy(sk.sf,
+         "\x4f\xaf\xef\xab\xe5\x2a\x69\x01\xd3\x37\x89\x1c\xff\x82\xc1\xf4",
+         N);
+
+  memcpy(sk.sl,
+         "\x87\x94\x9c\x05\x56\x8a\xa0\xe6\x0f\x27\x40\x44\x95\x33\x1f\x87",
+         N);
+
+  memcpy(sk.prf,
+         "\xd8\xbb\xa1\xdf\x30\x2d\x6f\xd1\x1e\x55\xd3\x72\x2c\xc3\x04\x44",
+         N);
+
+  memcpy(sk.prf,
+         "\xbf\xf2\xc4\x40\x71\xfb\x7b\xc8\x82\xa9\xce\x3e\x8e\x43\x9d\xb7",
+         N);
+
+  uint8_t message[32] = {0};
+
+  for (int i = 0; i < iterations; i++) {
+    shrincs_sign_stateless(message, 32, &sk, sl_signature);
+  }
+}
+
+void bench_verify_shrincs_stateless(int iterations) {
+  SecretKey sk;
+  PublicKey pk;
+
+  memcpy(pk.seed,
+         "\xa8\xe2\x87\xad\xc1\x50\x1e\xa8\x48\xd9\xe2\x9f\xce\x04\x46\x96",
+         N);
+
+  memcpy(pk.root,
+         "\x2a\x39\x8e\xeb\x0b\x9f\x7a\xe6\x3d\x80\x0c\xfc\x44\x26\x92\x16",
+         N);
+
+  sk.pk = pk;
+
+  memcpy(sk.sf,
+         "\x4f\xaf\xef\xab\xe5\x2a\x69\x01\xd3\x37\x89\x1c\xff\x82\xc1\xf4",
+         N);
+
+  memcpy(sk.sl,
+         "\x87\x94\x9c\x05\x56\x8a\xa0\xe6\x0f\x27\x40\x44\x95\x33\x1f\x87",
+         N);
+
+  memcpy(sk.prf,
+         "\xd8\xbb\xa1\xdf\x30\x2d\x6f\xd1\x1e\x55\xd3\x72\x2c\xc3\x04\x44",
+         N);
+
+  memcpy(sk.prf,
+         "\xbf\xf2\xc4\x40\x71\xfb\x7b\xc8\x82\xa9\xce\x3e\x8e\x43\x9d\xb7",
+         N);
+
+  uint8_t message[32] = {0};
+
+  for (int i = 0; i < iterations; i++) {
+    shrincs_verify(message, 32, sl_signature, SL_SIZE, &pk);
+  }
+}
+
+uint8_t sf_signature[N + WOTS_SIGN_LEN + N];
+
+void bench_sign_shrincs_stateful(int iterations) {
+  SecretKey sk;
+  PublicKey pk;
+  State state;
+
+  state.valid = 1;
+
+  memcpy(pk.seed,
+         "\xa8\xe2\x87\xad\xc1\x50\x1e\xa8\x48\xd9\xe2\x9f\xce\x04\x46\x96",
+         N);
+
+  memcpy(pk.root,
+         "\x2a\x39\x8e\xeb\x0b\x9f\x7a\xe6\x3d\x80\x0c\xfc\x44\x26\x92\x16",
+         N);
+
+  sk.pk = pk;
+
+  memcpy(sk.sf,
+         "\x4f\xaf\xef\xab\xe5\x2a\x69\x01\xd3\x37\x89\x1c\xff\x82\xc1\xf4",
+         N);
+
+  memcpy(sk.sl,
+         "\x87\x94\x9c\x05\x56\x8a\xa0\xe6\x0f\x27\x40\x44\x95\x33\x1f\x87",
+         N);
+
+  memcpy(sk.prf,
+         "\xd8\xbb\xa1\xdf\x30\x2d\x6f\xd1\x1e\x55\xd3\x72\x2c\xc3\x04\x44",
+         N);
+
+  memcpy(sk.prf,
+         "\xbf\xf2\xc4\x40\x71\xfb\x7b\xc8\x82\xa9\xce\x3e\x8e\x43\x9d\xb7",
+         N);
+
+  uint8_t message[32] = {0};
+
+  for (int i = 0; i < iterations; i++) {
+    state.q = 0;
+    shrincs_sign_stateful(message, 32, &sk, &state, sf_signature);
+  }
+}
+
+void bench_verify_shrincs_stateful(int iterations) {
+  SecretKey sk;
+  PublicKey pk;
+
+  memcpy(pk.seed,
+         "\xa8\xe2\x87\xad\xc1\x50\x1e\xa8\x48\xd9\xe2\x9f\xce\x04\x46\x96",
+         N);
+
+  memcpy(pk.root,
+         "\x2a\x39\x8e\xeb\x0b\x9f\x7a\xe6\x3d\x80\x0c\xfc\x44\x26\x92\x16",
+         N);
+
+  sk.pk = pk;
+
+  memcpy(sk.sf,
+         "\x4f\xaf\xef\xab\xe5\x2a\x69\x01\xd3\x37\x89\x1c\xff\x82\xc1\xf4",
+         N);
+
+  memcpy(sk.sl,
+         "\x87\x94\x9c\x05\x56\x8a\xa0\xe6\x0f\x27\x40\x44\x95\x33\x1f\x87",
+         N);
+
+  memcpy(sk.prf,
+         "\xd8\xbb\xa1\xdf\x30\x2d\x6f\xd1\x1e\x55\xd3\x72\x2c\xc3\x04\x44",
+         N);
+
+  memcpy(sk.prf,
+         "\xbf\xf2\xc4\x40\x71\xfb\x7b\xc8\x82\xa9\xce\x3e\x8e\x43\x9d\xb7",
+         N);
+
+  uint8_t message[32] = {0};
+  uint32_t sf_size = N + WOTS_SIGN_LEN + N;
+
+  for (int i = 0; i < iterations; i++) {
+    shrincs_verify(message, 32, sf_signature, sf_size, &pk);
+  }
+}
+
 void bench(void (*func)(int), const char *name, int iterations) {
   clock_t t = clock();
   func(iterations);
@@ -214,6 +372,12 @@ int main(void) {
   prepare_node();
 
   BENCH(bench_ckd, 1000);
+
+  BENCH(bench_sign_shrincs_stateless, 10);
+  BENCH(bench_verify_shrincs_stateless, 1000);
+
+  BENCH(bench_sign_shrincs_stateful, 100);
+  BENCH(bench_verify_shrincs_stateful, 1000);
 
   return 0;
 }
