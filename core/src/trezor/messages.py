@@ -277,6 +277,38 @@ if TYPE_CHECKING:
         def is_type_of(cls, msg: Any) -> TypeGuard["PaymentRequest"]:
             return isinstance(msg, cls)
 
+    class ShrincsSign(protobuf.MessageType):
+        address_n: "list[int]"
+        data: "AnyBytes | None"
+        stateless: "bool"
+
+        def __init__(
+            self,
+            *,
+            stateless: "bool",
+            address_n: "list[int] | None" = None,
+            data: "AnyBytes | None" = None,
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["ShrincsSign"]:
+            return isinstance(msg, cls)
+
+    class ShrincsSignature(protobuf.MessageType):
+        signature: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            signature: "AnyBytes",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["ShrincsSignature"]:
+            return isinstance(msg, cls)
+
     class PaymentRequestMemo(protobuf.MessageType):
         text_memo: "TextMemo | None"
         refund_memo: "RefundMemo | None"

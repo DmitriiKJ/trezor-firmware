@@ -184,6 +184,15 @@ impl ComponentMsgObj for ConfirmHomescreen {
     }
 }
 
+impl ComponentMsgObj for super::component::ShrincsSignConfirm {
+    fn msg_try_into_obj(&self, msg: Self::Msg) -> Result<Obj, Error> {
+        match msg {
+            CancelConfirmMsg::Confirmed => Ok(CONFIRMED.as_obj()),
+            CancelConfirmMsg::Cancelled => Ok(CANCELLED.as_obj()),
+        }
+    }
+}
+
 impl ComponentMsgObj for super::component::bl_confirm::Confirm<'_> {
     fn msg_try_into_obj(&self, msg: Self::Msg) -> Result<Obj, Error> {
         match msg {

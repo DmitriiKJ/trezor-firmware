@@ -39,10 +39,11 @@ use heapless::Vec;
 use super::{
     component::{
         check_homescreen_format, Bip39Input, CoinJoinProgress, Frame, FrameMsg, Homescreen,
-        Lockscreen, MnemonicKeyboard, PinKeyboard, Progress, PromptScreen, ScrolledVerticalMenu,
+        Lockscreen, MnemonicKeyboard, PinKeyboard, Progress, PromptMsg, PromptScreen,
+        ScrolledVerticalMenu,
         SelectWordCount, SelectWordCountLayout, Slip39Input, StatusScreen, SwipeContent,
-        SwipeUpScreen, TradeScreen, VerticalMenu, VerticalMenuChoiceMsg, VerticalMenuItem,
-        VerticalMenuItems,
+        SwipeUpScreen, HoldToConfirm, TradeScreen, VerticalMenu, VerticalMenuChoiceMsg,
+        VerticalMenuItem, VerticalMenuItems,
     },
     flow::{
         self, new_confirm_action_simple, ConfirmActionExtra, ConfirmActionMenuStrings,
@@ -1253,5 +1254,26 @@ impl FirmwareUI for UIDelizia {
     fn tutorial() -> Result<impl LayoutMaybeTrace, Error> {
         let flow = flow::show_tutorial::new_show_tutorial()?;
         Ok(flow)
+    }
+}
+
+impl UIDelizia {
+    pub fn confirm_shrincs() -> Result<impl LayoutMaybeTrace, Error> {
+        let prompt = PromptScreen::Hold(
+            HoldToConfirm::new(theme::GREEN, theme::GREEN_LIGHT)
+                .with_icon(theme::ICON_SHRINCS_LOGO),
+        );
+        let frame = Frame::left_aligned("SHRINCS".into(), SwipeContent::new(prompt))
+            .with_cancel_button()
+            .with_footer(TR::instructions__hold_to_sign.into(), None);
+
+        flow::util::single_page(MsgMap::new(
+            frame,
+            |msg: FrameMsg<PromptMsg>| match msg {
+                FrameMsg::Content(PromptMsg::Confirmed) => Some(FlowMsg::Confirmed),
+                FrameMsg::Button(FlowMsg::Cancelled) => Some(FlowMsg::Cancelled),
+                _ => None,
+            },
+        ))
     }
 }

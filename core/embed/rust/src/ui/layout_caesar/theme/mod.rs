@@ -95,6 +95,9 @@ include_icon!(ICON_TICK, "layout_caesar/res/tick.toif"); // 8*6
 include_icon!(ICON_TICK_FAT, "layout_caesar/res/tick_fat.toif"); // 8*6
 include_icon!(ICON_WARNING, "layout_caesar/res/warning.toif"); // 11*12
 include_icon!(ICON_WARN_TITLE, "layout_caesar/res/bld_header_warn.toif");
+include_icon!(ICON_SHRINCS, "layout_caesar/res/shrincs.toif");
+include_icon!(ICON_SHRINCS_R, "layout_caesar/res/shrincs_r.toif");
+include_icon!(ICON_SHRINCS_LOGO, "layout_caesar/res/shrincs_logo.toif");
 
 // props settings
 pub const PROP_INNER_SPACING: i16 = PARAGRAPH_BOTTOM_SPACE;

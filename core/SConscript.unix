@@ -185,6 +185,13 @@ SOURCE_MOD_CRYPTO += [
     'vendor/trezor-crypto/shamir.c',
     'vendor/trezor-crypto/slip39.c',
     'vendor/trezor-crypto/slip39_english.c',
+    'vendor/trezor-crypto/shrincs/shrincs.c',
+    'vendor/trezor-crypto/shrincs/address.c',
+    'vendor/trezor-crypto/shrincs/hash.c',
+    'vendor/trezor-crypto/shrincs/pors_fp.c',
+    'vendor/trezor-crypto/shrincs/uxmss.c',
+    'vendor/trezor-crypto/shrincs/xmss.c',
+    'vendor/trezor-crypto/shrincs/wots_c.c',
 ]
 if EVERYTHING:
     SOURCE_MOD_CRYPTO += [

@@ -708,3 +708,5 @@ if TYPE_CHECKING:
         BenchmarkResult = 9103
         TelemetryGet = 1100
         Telemetry = 1101
+        ShrincsSign = 1102
+        ShrincsSignature = 1103

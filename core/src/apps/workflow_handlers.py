@@ -79,6 +79,9 @@ def _find_message_handler_module(msg_type: int) -> str:
     if utils.USE_BLE:
         if msg_type == MessageType.BleUnpair:
             return "apps.management.ble.unpair"
+        
+    if msg_type == MessageType.ShrincsSign:
+        return "apps.shrincs.shrincs_sign"
 
     # bitcoin
     if msg_type == MessageType.AuthorizeCoinJoin:

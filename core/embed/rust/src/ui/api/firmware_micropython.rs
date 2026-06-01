@@ -306,6 +306,24 @@ extern "C" fn new_confirm_homescreen(n_args: usize, args: *const Obj, kwargs: *m
     unsafe { util::try_with_args_and_kwargs(n_args, args, kwargs, block) }
 }
 
+#[cfg(feature = "layout_caesar")]
+extern "C" fn new_confirm_shrincs(n_args: usize, args: *const Obj, kwargs: *mut Map) -> Obj {
+    let block = move |_args: &[Obj], _kwargs: &Map| {
+        let layout = crate::ui::layout_caesar::UICaesar::confirm_shrincs()?;
+        Ok(LayoutObj::new_root(layout)?.into())
+    };
+    unsafe { util::try_with_args_and_kwargs(n_args, args, kwargs, block) }
+}
+
+#[cfg(feature = "layout_delizia")]
+extern "C" fn new_confirm_shrincs(n_args: usize, args: *const Obj, kwargs: *mut Map) -> Obj {
+    let block = move |_args: &[Obj], _kwargs: &Map| {
+        let layout = crate::ui::layout_delizia::UIDelizia::confirm_shrincs()?;
+        Ok(LayoutObj::new_root(layout)?.into())
+    };
+    unsafe { util::try_with_args_and_kwargs(n_args, args, kwargs, block) }
+}
+
 extern "C" fn new_confirm_modify_fee(n_args: usize, args: *const Obj, kwargs: *mut Map) -> Obj {
     let block = move |_args: &[Obj], kwargs: &Map| {
         let title: TString = kwargs.get(Qstr::MP_QSTR_title)?.try_into()?;
@@ -1638,6 +1656,11 @@ pub static mp_module_trezorui_api: Module = obj_module! {
     /// ) -> LayoutObj[UiResult]:
     ///     """Confirm homescreen."""
     Qstr::MP_QSTR_confirm_homescreen => obj_fn_kw!(0, new_confirm_homescreen).as_obj(),
+
+    /// def confirm_shrincs() -> LayoutObj[UiResult]:
+    ///     """Show SHRINCS signing confirmation with logo."""
+    #[cfg(any(feature = "layout_caesar", feature = "layout_delizia"))]
+    Qstr::MP_QSTR_confirm_shrincs => obj_fn_kw!(0, new_confirm_shrincs).as_obj(),
 
     /// def confirm_modify_fee(
     ///     *,

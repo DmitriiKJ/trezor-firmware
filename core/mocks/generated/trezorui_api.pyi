@@ -275,6 +275,11 @@ def confirm_homescreen(
 
 
 # rust/src/ui/api/firmware_micropython.rs
+def confirm_shrincs() -> LayoutObj[UiResult]:
+    """Show SHRINCS signing confirmation with logo."""
+
+
+# rust/src/ui/api/firmware_micropython.rs
 def confirm_modify_fee(
     *,
     title: str,

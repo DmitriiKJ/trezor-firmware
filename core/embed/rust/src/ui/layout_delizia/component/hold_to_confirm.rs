@@ -3,7 +3,7 @@ use crate::{
     translations::TR,
     ui::{
         component::{Component, Event, EventCtx},
-        display::Color,
+        display::{Color, Icon},
         geometry::{Alignment2D, Offset, Rect},
         lerp::Lerp,
         shape,
@@ -172,6 +172,7 @@ pub struct HoldToConfirm {
     circle_color: Color,
     circle_pad_color: Color,
     circle_inner_color: Color,
+    icon: Icon,
     anim: HoldToConfirmAnim,
     finalizing: bool,
 }
@@ -193,10 +194,16 @@ impl HoldToConfirm {
             circle_color,
             circle_pad_color: theme::GREY_EXTRA_DARK,
             circle_inner_color,
+            icon: theme::ICON_SIGN,
             button,
             anim: HoldToConfirmAnim::default(),
             finalizing: false,
         }
+    }
+
+    pub fn with_icon(mut self, icon: Icon) -> Self {
+        self.icon = icon;
+        self
     }
 }
 
@@ -336,7 +343,7 @@ impl Component for HoldToConfirm {
             .with_alpha(circle_alpha)
             .render(target);
 
-        shape::ToifImage::new(center, theme::ICON_SIGN.toif)
+        shape::ToifImage::new(center, self.icon.toif)
             .with_fg(theme::GREY)
             .with_alpha(circle_alpha)
             .with_align(Alignment2D::CENTER)

@@ -45,7 +45,8 @@ void pors_msg_to_indices(const uint8_t* message, uint8_t* adrs, SHA256_CTX* hash
     {
         SHA256_CTX ctx_ = ctx;
 
-        uint32_t ctr_be = htonl(blk);
+        uint32_t ctr_be;
+        REVERSE32(blk, ctr_be);
 
         sha256_add_to_ctx(&ctx_, (const uint8_t*)&ctr_be, 4);
         sha256_finalize_32(&ctx_, block);
@@ -213,8 +214,7 @@ void pors_sk_gen(const uint8_t* sk_seed, SHA256_CTX* hash_ctx, uint8_t* adrs, ui
 
 void pors_treehash(const uint8_t* sk_seed, SHA256_CTX* hash_ctx, uint8_t* adrs, uint32_t target_height, uint32_t idx, uint8_t* out)
 {
-    uint32_t h = ceil(log2(T));
-    uint32_t s = T - (1 << (h - 1));
+    uint32_t s = T - (1 << (B - 1));
 
     SHA256_CTX ctx = *hash_ctx;
     uint8_t sk[N];

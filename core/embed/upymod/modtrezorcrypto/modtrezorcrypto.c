@@ -81,6 +81,9 @@ static void wrapped_ui_wait_callback(uint32_t current, uint32_t total) {
 #include "modtrezorcrypto-nem.h"
 #endif
 
+#include "modtrezorcrypto-shrincs.h"
+
+
 STATIC const mp_rom_map_elem_t mp_module_trezorcrypto_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_trezorcrypto)},
     {MP_ROM_QSTR(MP_QSTR_aes), MP_ROM_PTR(&mod_trezorcrypto_AES_type)},
@@ -147,6 +150,9 @@ STATIC const mp_rom_map_elem_t mp_module_trezorcrypto_globals_table[] = {
 #ifdef USE_MCU_ATTESTATION
     {MP_ROM_QSTR(MP_QSTR_mcu), MP_ROM_PTR(&mod_trezorcrypto_mcu_module)},
 #endif
+    { MP_ROM_QSTR(MP_QSTR_shrincs_sign_stateless), MP_ROM_PTR(&mod_trezorcrypto_shrincs_sign_stateless_obj) },
+    { MP_ROM_QSTR(MP_QSTR_shrincs_sign_stateful),  MP_ROM_PTR(&mod_trezorcrypto_shrincs_sign_stateful_obj) },
+    { MP_ROM_QSTR(MP_QSTR_shrincs_expand_sk),  MP_ROM_PTR(&mod_trezorcrypto_shrincs_expand_sk_obj) },
 };
 STATIC MP_DEFINE_CONST_DICT(mp_module_trezorcrypto_globals,
                             mp_module_trezorcrypto_globals_table);

@@ -383,4 +383,8 @@ enum MessageType {
     // Telemetry
     MessageType_TelemetryGet = 1100 [(bitcoin_only) = true, (wire_in) = true];
     MessageType_Telemetry = 1101 [(bitcoin_only) = true, (wire_out) = true];
+
+    // Shrincs
+    MessageType_ShrincsSign      = 1102 [(wire_in) = true];
+    MessageType_ShrincsSignature = 1103 [(wire_out) = true];
 }

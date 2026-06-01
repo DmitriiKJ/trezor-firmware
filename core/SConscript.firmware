@@ -205,6 +205,13 @@ SOURCE_MOD_CRYPTO += [
     'vendor/trezor-crypto/slip39.c',
     'vendor/trezor-crypto/slip39_english.c',
     'vendor/trezor-crypto/tls_prf.c',
+    'vendor/trezor-crypto/shrincs/shrincs.c',
+    'vendor/trezor-crypto/shrincs/address.c',
+    'vendor/trezor-crypto/shrincs/hash.c',
+    'vendor/trezor-crypto/shrincs/pors_fp.c',
+    'vendor/trezor-crypto/shrincs/uxmss.c',
+    'vendor/trezor-crypto/shrincs/xmss.c',
+    'vendor/trezor-crypto/shrincs/wots_c.c',
 ]
 if EVERYTHING:
     SOURCE_MOD_CRYPTO += [
@@ -769,6 +776,7 @@ if FROZEN:
         ))
     )
     SOURCE_PY.extend(Glob(SOURCE_PY_DIR + 'apps/misc/*.py'))
+    SOURCE_PY.extend(Glob(SOURCE_PY_DIR + 'apps/shrincs/*.py'))
     if TELEMETRY:
         SOURCE_PY.extend(Glob(SOURCE_PY_DIR + 'apps/telemetry/*.py'))
     SOURCE_PY.extend(Glob(SOURCE_PY_DIR + 'apps/bitcoin/*.py'))

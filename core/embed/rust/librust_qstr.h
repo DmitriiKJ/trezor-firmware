@@ -295,6 +295,7 @@ static void _librust_qstrs(void) {
   MP_QSTR_confirm_more;
   MP_QSTR_confirm_properties;
   MP_QSTR_confirm_reset_device;
+  MP_QSTR_confirm_shrincs;
   MP_QSTR_confirm_summary;
   MP_QSTR_confirm_thp_pairing;
   MP_QSTR_confirm_total__fee_rate;

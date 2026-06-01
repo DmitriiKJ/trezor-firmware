@@ -38,7 +38,7 @@ use super::{
         AddressDetails, ButtonActions, ButtonDetails, ButtonLayout, ButtonPage, ChoiceControls,
         CoinJoinProgress, ConfirmHomescreen, Flow, FlowPages, Frame, Homescreen, Lockscreen,
         NumberInput, Page, PassphraseEntry, PinEntry, Progress, ScrollableFrame, ShareWords,
-        ShowMore, SimpleChoice, WordlistEntry, WordlistType,
+        ShrincsSignConfirm, ShowMore, SimpleChoice, WordlistEntry, WordlistType,
     },
     constant, fonts, theme, UICaesar,
 };
@@ -1243,6 +1243,11 @@ impl FirmwareUI for UICaesar {
         _danger: bool,
     ) -> Result<impl LayoutMaybeTrace, Error> {
         let mut progress = Progress::new(indeterminate, description);
+        if let Some(ref t) = title {
+            if *t == TString::Str("SHRINCS") {
+                progress = progress.with_icon(theme::ICON_SHRINCS_R).with_shrincs_mode();
+            }
+        }
         if let Some(title) = title {
             progress = progress.with_title(title);
         };
@@ -1471,6 +1476,13 @@ impl FirmwareUI for UICaesar {
                 .with_ignore_second_button_ms(constant::IGNORE_OTHER_BTN_MS),
         );
         Ok(layout)
+    }
+}
+
+impl UICaesar {
+    pub fn confirm_shrincs() -> Result<impl LayoutMaybeTrace, Error> {
+        let screen = ShrincsSignConfirm::new("SHRINCS".into(), theme::ICON_SHRINCS_LOGO);
+        Ok(RootComponent::new(screen))
     }
 }
 

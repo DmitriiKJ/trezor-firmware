@@ -767,6 +767,8 @@ class MessageType(IntEnum):
     BenchmarkResult = 9103
     TelemetryGet = 1100
     Telemetry = 1101
+    ShrincsSign = 1102
+    ShrincsSignature = 1103
 
 
 class BenchmarkListNames(protobuf.MessageType):
@@ -1006,6 +1008,40 @@ class PaymentRequest(protobuf.MessageType):
         self.signature = signature
         self.nonce = nonce
         self.amount = amount
+
+
+class ShrincsSign(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1102
+    FIELDS = {
+        1: protobuf.Field("address_n", "uint32", repeated=True, required=False, default=None),
+        2: protobuf.Field("data", "bytes", repeated=False, required=False, default=None),
+        3: protobuf.Field("stateless", "bool", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        stateless: "bool",
+        address_n: Optional[Sequence["int"]] = None,
+        data: Optional["bytes"] = None,
+    ) -> None:
+        self.address_n: Sequence["int"] = address_n if address_n is not None else []
+        self.stateless = stateless
+        self.data = data
+
+
+class ShrincsSignature(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1103
+    FIELDS = {
+        1: protobuf.Field("signature", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        signature: "bytes",
+    ) -> None:
+        self.signature = signature
 
 
 class PaymentRequestMemo(protobuf.MessageType):

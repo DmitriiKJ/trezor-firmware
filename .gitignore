@@ -13,3 +13,4 @@ proto.gv*
 .DS_Store
 crypto/tests/libtrezor-crypto.so.dSYM/
 .hypothesis/
+tests/device_tests/test_shrincs*

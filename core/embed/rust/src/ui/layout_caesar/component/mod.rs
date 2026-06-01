@@ -70,3 +70,5 @@ pub use scrollbar::ScrollBar;
 #[cfg(feature = "translations")]
 pub use share_words::ShareWords;
 pub use show_more::{CancelInfoConfirmMsg, ShowMore};
+mod shrincs;
+pub use shrincs::ShrincsSignConfirm;

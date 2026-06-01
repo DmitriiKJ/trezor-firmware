@@ -131,6 +131,9 @@ include_icon!(
 // Icon for "next keyboard layout" for special characters
 include_icon!(ICON_ASTERISK, "layout_delizia/res/asterisk16.toif");
 
+// SHRINCS
+include_icon!(ICON_SHRINCS_LOGO, "layout_caesar/res/shrincs_logo.toif");
+
 // Welcome screen.
 include_icon!(ICON_LOGO, "layout_delizia/res/lock_full.toif");
 

@@ -106,6 +106,8 @@ trezor_message_impl! {
     BenchmarkResult => MessageType_BenchmarkResult,
     TelemetryGet => MessageType_TelemetryGet,
     Telemetry => MessageType_Telemetry,
+    ShrincsSign => MessageType_ShrincsSign,
+    ShrincsSignature => MessageType_ShrincsSignature,
 }
 
 #[cfg(feature = "bitcoin")]

@@ -29,12 +29,13 @@ void xmss_root(const uint8_t* sk_seed, SHA256_CTX* hash_ctx, uint8_t* adrs, uint
     return xmss_treehash(sk_seed, hash_ctx, adrs, h_prime, 0, out);
 }
 
-void xmss_auth_path(const uint8_t* sk_seed, SHA256_CTX* hash_ctx, uint8_t* adrs, uint32_t h_prime, uint32_t idx, uint8_t* out)
+void xmss_auth_path(const uint8_t* sk_seed, SHA256_CTX* hash_ctx, uint8_t* adrs, uint32_t h_prime, uint32_t idx, uint8_t* out, shrincs_progress_cb cb, void *cb_ud, uint16_t prog_start, uint16_t prog_end)
 {
     for (uint32_t i = 0; i < h_prime; i++)
     {
         uint32_t sibling_start = ((idx ^ (1 << i)) >> i) << i;
         xmss_treehash(sk_seed, hash_ctx, adrs, i, sibling_start, out + i*N);
+        if (cb) cb((uint16_t)(prog_start + (uint32_t)(prog_end - prog_start) * (i + 1) / h_prime), cb_ud);
     }
 }
 
@@ -68,8 +69,9 @@ void xmss_pk_from_sig(const uint8_t* wots_sig, const uint8_t* auth, const uint8_
     }
 }
 
-void xmss_sign(const uint8_t* message, const uint8_t* sk_seed, const uint8_t* sk_prf, const uint8_t* pk_seed, const uint8_t* pk_root, SHA256_CTX* hash_ctx, uint8_t* adrs, uint32_t h_prime, uint32_t idx, uint8_t* out) 
+void xmss_sign(const uint8_t* message, const uint8_t* sk_seed, const uint8_t* sk_prf, const uint8_t* pk_seed, const uint8_t* pk_root, SHA256_CTX* hash_ctx, uint8_t* adrs, uint32_t h_prime, uint32_t idx, uint8_t* out, shrincs_progress_cb cb, void *cb_ud, uint16_t prog_start, uint16_t prog_end)
 {
-    wots_sign(message, N, sk_seed, sk_prf, pk_seed, pk_root, hash_ctx, adrs, idx, 0, 1, out);
-    xmss_auth_path(sk_seed, hash_ctx, adrs, h_prime, idx, out + WOTS_SIGN_LEN);
+    uint16_t mid = (uint16_t)(prog_start + (uint32_t)(prog_end - prog_start) * 40 / 100);
+    wots_sign(message, N, sk_seed, sk_prf, pk_seed, pk_root, hash_ctx, adrs, idx, 0, 1, out, cb, cb_ud, prog_start, mid);
+    xmss_auth_path(sk_seed, hash_ctx, adrs, h_prime, idx, out + WOTS_SIGN_LEN, cb, cb_ud, mid, prog_end);
 }

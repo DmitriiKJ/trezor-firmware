@@ -9,6 +9,8 @@ from trezorcrypto import (  # noqa: F401
     random,
 )
 
+from trezorcrypto import shrincs_sign_stateless, shrincs_sign_stateful, shrincs_expand_sk
+
 try:
     from trezorcrypto import aesgcm  # noqa: F401
 except Exception:

@@ -3,6 +3,7 @@
 
 #include <string.h>
 
+#include "byte_order.h"
 #include "sha2.h"
 #include "constants.h"
 #include "address.h"

@@ -44,7 +44,8 @@ void prf_msg(const uint8_t* sk_prf, const uint8_t* pk_seed, const uint8_t* opt_r
     {
         SHA256_CTX ctx_ = ctx;
 
-        uint32_t ctr_be = htonl(i);
+        uint32_t ctr_be;
+        REVERSE32(i, ctr_be);
 
         sha256_add_to_ctx(&ctx_, (const uint8_t*)&ctr_be, 4);
         sha256_finalize_32(&ctx_, hash);

@@ -1066,6 +1066,8 @@ STATIC const mp_rom_map_elem_t mp_module_trezorutils_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR_LOG_STACK_USAGE), mp_const_false},
 #endif  // LOG_STACK_USAGE
 #endif  // PYOPT
+
+    {MP_ROM_QSTR(MP_QSTR_USE_SHRINCS), mp_const_true},
 };
 
 STATIC MP_DEFINE_CONST_DICT(mp_module_trezorutils_globals,

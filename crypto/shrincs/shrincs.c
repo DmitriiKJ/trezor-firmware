@@ -79,7 +79,8 @@ void shrincs_restore(const uint8_t* seed, PublicKey* out_pk, SecretKey* out_sk, 
     out_state->valid = 0;
 }
 
-uint32_t shrincs_sign_stateful(const uint8_t* message, uint32_t message_len, SecretKey* sk, State* state, uint8_t* out)
+uint32_t shrincs_sign_stateful(const uint8_t* message, uint32_t message_len, SecretKey* sk, State* state, uint8_t* out,
+                               shrincs_progress_cb cb, void *cb_userdata)
 {
     if (!state->valid) {
         return 0;
@@ -102,13 +103,18 @@ uint32_t shrincs_sign_stateful(const uint8_t* message, uint32_t message_len, Sec
     sha256_add_to_ctx(&hash_ctx, adrs, 16);
 
     memcpy(out, sk->sl, N);
-    uxmss_sign(message, message_len, sk->seed, sk->prf, sk->pk.seed, sk->pk.root, &hash_ctx, adrs, q, out + N);
+
+    setLayerAddress(adrs, 0);
+    setTreeAddress(adrs, 0, 0);
+    wots_sign(message, message_len, sk->seed, sk->prf, sk->pk.seed, sk->pk.root, &hash_ctx, adrs, q, 1, 0, out + N, cb, cb_userdata, 0, 700);
+    uxmss_auth_path(sk->seed, &hash_ctx, adrs, q, out + N + WOTS_SIGN_LEN, cb, cb_userdata, 700, 900);
 
     state->q = q;
     return 1;
 }
 
-uint32_t shrincs_sign_stateless(const uint8_t* message, uint32_t message_len, SecretKey* sk, uint8_t* out)
+uint32_t shrincs_sign_stateless(const uint8_t* message, uint32_t message_len, SecretKey* sk, uint8_t* out,
+                                shrincs_progress_cb cb, void *cb_userdata)
 {
     uint8_t adrs[32] = {0};
 
@@ -123,11 +129,12 @@ uint32_t shrincs_sign_stateless(const uint8_t* message, uint32_t message_len, Se
     uint8_t digest[32];
 
     memcpy(out, sk->sf, N);
-    
+
     if (!pors_sign(message, message_len, sk->seed, sk->prf, sk->pk.seed, sk->pk.root, &hash_ctx, adrs, digest, out + N))
     {
         return 0;
     }
+    if (cb) cb(300, cb_userdata);  // ~30% after PORS signing
 
     uint32_t indices[K];
     uint8_t xof_out[xof_block_idx * 32];
@@ -142,12 +149,13 @@ uint32_t shrincs_sign_stateless(const uint8_t* message, uint32_t message_len, Se
     setTreeAddress(adrs, 0, tree_idx[0] * (1 << H_PRIME) + leaf_idx[0]);
     uint8_t msg[N];
     pors_pk_from_sig(out + N, indices, &hash_ctx, adrs, msg);
+    if (cb) cb(450, cb_userdata);  // ~45% after index computation
 
     for (uint32_t layer = 0; layer < D; layer++)
     {
         setLayerAddress(adrs, layer);
         setTreeAddress(adrs, 0, tree_idx[layer]);
-        xmss_sign(msg, sk->seed, sk->prf, sk->pk.seed, sk->pk.root, &hash_ctx, adrs, H_PRIME, leaf_idx[layer], out + N + PORS_SIGN_LEN + XMSS_SIGN_LEN * layer);
+        xmss_sign(msg, sk->seed, sk->prf, sk->pk.seed, sk->pk.root, &hash_ctx, adrs, H_PRIME, leaf_idx[layer], out + N + PORS_SIGN_LEN + XMSS_SIGN_LEN * layer, cb, cb_userdata, 450 + 500 * layer / D, 450 + 500 * (layer + 1) / D);
 
         if (layer < D - 1)
         {

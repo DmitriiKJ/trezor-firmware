@@ -9,7 +9,7 @@ use crate::{
         },
         constant,
         display::{Icon, LOADER_MAX},
-        geometry::{Alignment2D, Offset, Rect},
+        geometry::{Alignment2D, Offset, Point, Rect},
         shape,
         shape::Renderer,
         util::animation_disabled,
@@ -30,6 +30,7 @@ pub struct Progress {
     description: Child<Paragraphs<Paragraph<'static>>>,
     description_pad: Pad,
     icon: Icon,
+    shrincs_mode: bool,
 }
 
 impl Progress {
@@ -46,6 +47,7 @@ impl Progress {
             )),
             description_pad: Pad::with_background(theme::BG),
             icon: theme::ICON_TICK_FAT,
+            shrincs_mode: false,
         }
     }
 
@@ -56,6 +58,11 @@ impl Progress {
 
     pub fn with_icon(mut self, icon: Icon) -> Self {
         self.icon = icon;
+        self
+    }
+
+    pub fn with_shrincs_mode(mut self) -> Self {
+        self.shrincs_mode = true;
         self
     }
 
@@ -135,20 +142,48 @@ impl Component for Progress {
         self.title.render(target);
 
         let area = constant::screen();
-        let center = area.center() + Offset::y(self.loader_y_offset);
 
-        if self.indeterminate {
-            cshape::LoaderStarry::new(center, self.value)
-                .with_color(theme::FG)
-                .render(target);
-        } else {
-            cshape::LoaderCircular::new(center, self.value)
-                .with_color(theme::FG)
-                .render(target);
-            shape::ToifImage::new(center, self.icon.toif)
+        if self.shrincs_mode {
+            let track_y = area.center().y + self.loader_y_offset;
+            let track_x0: i16 = 16;
+            let track_x1: i16 = area.x1 - 16;
+            let track_width = track_x1 - track_x0;
+
+            // Shrimp x position (0-1000 maps to track_x0..track_x1)
+            let shrimp_x =
+                track_x0 + (track_width as i32 * self.value as i32 / 1000) as i16;
+
+            // Five dots at equal intervals; disappear once shrimp reaches them
+            for i in 1_i16..=5 {
+                let dot_x = track_x0 + track_width * i / 6;
+                if dot_x > shrimp_x {
+                    shape::Circle::new(Point::new(dot_x, track_y), 3)
+                        .with_bg(theme::FG)
+                        .render(target);
+                }
+            }
+
+            // Shrimp icon centered on current position
+            shape::ToifImage::new(Point::new(shrimp_x, track_y), self.icon.toif)
                 .with_align(Alignment2D::CENTER)
                 .with_fg(theme::FG)
                 .render(target);
+        } else {
+            let center = area.center() + Offset::y(self.loader_y_offset);
+
+            if self.indeterminate {
+                cshape::LoaderStarry::new(center, self.value)
+                    .with_color(theme::FG)
+                    .render(target);
+            } else {
+                cshape::LoaderCircular::new(center, self.value)
+                    .with_color(theme::FG)
+                    .render(target);
+                shape::ToifImage::new(center, self.icon.toif)
+                    .with_align(Alignment2D::CENTER)
+                    .with_fg(theme::FG)
+                    .render(target);
+            }
         }
         self.description_pad.render(target);
         self.description.render(target);
