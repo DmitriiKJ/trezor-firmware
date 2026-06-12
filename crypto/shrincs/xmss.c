@@ -41,7 +41,8 @@ void xmss_auth_path(const uint8_t* sk_seed, SHA256_CTX* hash_ctx, uint8_t* adrs,
 
 void xmss_pk_from_sig(const uint8_t* wots_sig, const uint8_t* auth, const uint8_t* message, const uint8_t* pk_root, SHA256_CTX* hash_ctx, uint8_t* adrs, uint32_t h_prime, uint32_t idx, uint8_t* out)
 {
-    wots_pk_from_sig(wots_sig, message, N, pk_root, hash_ctx, adrs, idx, 0, 1, out);
+    // !!! Remove or use swn from parameters, now it's only for stateful test, so leave standard SWN
+    wots_pk_from_sig(wots_sig, message, N, pk_root, hash_ctx, adrs, idx, 0, 1, out, SWN);
 
     for (uint32_t i = 0; i < h_prime; i++)
     {
@@ -72,6 +73,6 @@ void xmss_pk_from_sig(const uint8_t* wots_sig, const uint8_t* auth, const uint8_
 void xmss_sign(const uint8_t* message, const uint8_t* sk_seed, const uint8_t* sk_prf, const uint8_t* pk_seed, const uint8_t* pk_root, SHA256_CTX* hash_ctx, uint8_t* adrs, uint32_t h_prime, uint32_t idx, uint8_t* out, shrincs_progress_cb cb, void *cb_ud, uint16_t prog_start, uint16_t prog_end)
 {
     uint16_t mid = (uint16_t)(prog_start + (uint32_t)(prog_end - prog_start) * 40 / 100);
-    wots_sign(message, N, sk_seed, sk_prf, pk_seed, pk_root, hash_ctx, adrs, idx, 0, 1, out, cb, cb_ud, prog_start, mid);
+    wots_sign(message, N, sk_seed, sk_prf, pk_seed, pk_root, hash_ctx, adrs, idx, 0, 1, out, SWN, cb, cb_ud, prog_start, mid);
     xmss_auth_path(sk_seed, hash_ctx, adrs, h_prime, idx, out + WOTS_SIGN_LEN, cb, cb_ud, mid, prog_end);
 }

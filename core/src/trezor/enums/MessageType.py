@@ -293,3 +293,5 @@ if not utils.BITCOIN_ONLY:
     TronVoteWitnessContract = 2210
     ShrincsSign = 1102
     ShrincsSignature = 1103
+    SlhDsaSign = 1104
+    SlhDsaSignature = 1105

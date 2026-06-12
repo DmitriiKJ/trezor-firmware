@@ -4018,6 +4018,8 @@ pub struct ShrincsSign {
     pub data: ::std::option::Option<::std::vec::Vec<u8>>,
     // @@protoc_insertion_point(field:hw.trezor.messages.common.ShrincsSign.stateless)
     pub stateless: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.ShrincsSign.swn)
+    pub swn: ::std::option::Option<u32>,
     // special fields
     // @@protoc_insertion_point(special_field:hw.trezor.messages.common.ShrincsSign.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -4034,7 +4036,7 @@ impl ShrincsSign {
         ::std::default::Default::default()
     }
 
-    // optional bytes data = 2;
+    // required bytes data = 2;
 
     pub fn data(&self) -> &[u8] {
         match self.data.as_ref() {
@@ -4089,8 +4091,27 @@ impl ShrincsSign {
         self.stateless = ::std::option::Option::Some(v);
     }
 
+    // optional uint32 swn = 4;
+
+    pub fn swn(&self) -> u32 {
+        self.swn.unwrap_or(0)
+    }
+
+    pub fn clear_swn(&mut self) {
+        self.swn = ::std::option::Option::None;
+    }
+
+    pub fn has_swn(&self) -> bool {
+        self.swn.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_swn(&mut self, v: u32) {
+        self.swn = ::std::option::Option::Some(v);
+    }
+
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
             "address_n",
@@ -4107,6 +4128,11 @@ impl ShrincsSign {
             |m: &ShrincsSign| { &m.stateless },
             |m: &mut ShrincsSign| { &mut m.stateless },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "swn",
+            |m: &ShrincsSign| { &m.swn },
+            |m: &mut ShrincsSign| { &mut m.swn },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ShrincsSign>(
             "ShrincsSign",
             fields,
@@ -4119,6 +4145,9 @@ impl ::protobuf::Message for ShrincsSign {
     const NAME: &'static str = "ShrincsSign";
 
     fn is_initialized(&self) -> bool {
+        if self.data.is_none() {
+            return false;
+        }
         if self.stateless.is_none() {
             return false;
         }
@@ -4139,6 +4168,9 @@ impl ::protobuf::Message for ShrincsSign {
                 },
                 24 => {
                     self.stateless = ::std::option::Option::Some(is.read_bool()?);
+                },
+                32 => {
+                    self.swn = ::std::option::Option::Some(is.read_uint32()?);
                 },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -4161,6 +4193,9 @@ impl ::protobuf::Message for ShrincsSign {
         if let Some(v) = self.stateless {
             my_size += 1 + 1;
         }
+        if let Some(v) = self.swn {
+            my_size += ::protobuf::rt::uint32_size(4, v);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -4175,6 +4210,9 @@ impl ::protobuf::Message for ShrincsSign {
         }
         if let Some(v) = self.stateless {
             os.write_bool(3, v)?;
+        }
+        if let Some(v) = self.swn {
+            os.write_uint32(4, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -4196,6 +4234,7 @@ impl ::protobuf::Message for ShrincsSign {
         self.address_n.clear();
         self.data = ::std::option::Option::None;
         self.stateless = ::std::option::Option::None;
+        self.swn = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -4204,6 +4243,7 @@ impl ::protobuf::Message for ShrincsSign {
             address_n: ::std::vec::Vec::new(),
             data: ::std::option::Option::None,
             stateless: ::std::option::Option::None,
+            swn: ::std::option::Option::None,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -4388,6 +4428,389 @@ impl ::protobuf::reflect::ProtobufValue for ShrincsSignature {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
+// @@protoc_insertion_point(message:hw.trezor.messages.common.SlhDsaSign)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct SlhDsaSign {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaSign.address_n)
+    pub address_n: ::std::vec::Vec<u32>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaSign.data)
+    pub data: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaSign.is_standart)
+    pub is_standart: ::std::option::Option<bool>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.SlhDsaSign.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a SlhDsaSign {
+    fn default() -> &'a SlhDsaSign {
+        <SlhDsaSign as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl SlhDsaSign {
+    pub fn new() -> SlhDsaSign {
+        ::std::default::Default::default()
+    }
+
+    // required bytes data = 2;
+
+    pub fn data(&self) -> &[u8] {
+        match self.data.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_data(&mut self) {
+        self.data = ::std::option::Option::None;
+    }
+
+    pub fn has_data(&self) -> bool {
+        self.data.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_data(&mut self, v: ::std::vec::Vec<u8>) {
+        self.data = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_data(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.data.is_none() {
+            self.data = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.data.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_data(&mut self) -> ::std::vec::Vec<u8> {
+        self.data.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    // required bool is_standart = 3;
+
+    pub fn is_standart(&self) -> bool {
+        self.is_standart.unwrap_or(false)
+    }
+
+    pub fn clear_is_standart(&mut self) {
+        self.is_standart = ::std::option::Option::None;
+    }
+
+    pub fn has_is_standart(&self) -> bool {
+        self.is_standart.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_is_standart(&mut self, v: bool) {
+        self.is_standart = ::std::option::Option::Some(v);
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+            "address_n",
+            |m: &SlhDsaSign| { &m.address_n },
+            |m: &mut SlhDsaSign| { &mut m.address_n },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "data",
+            |m: &SlhDsaSign| { &m.data },
+            |m: &mut SlhDsaSign| { &mut m.data },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "is_standart",
+            |m: &SlhDsaSign| { &m.is_standart },
+            |m: &mut SlhDsaSign| { &mut m.is_standart },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SlhDsaSign>(
+            "SlhDsaSign",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for SlhDsaSign {
+    const NAME: &'static str = "SlhDsaSign";
+
+    fn is_initialized(&self) -> bool {
+        if self.data.is_none() {
+            return false;
+        }
+        if self.is_standart.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    is.read_repeated_packed_uint32_into(&mut self.address_n)?;
+                },
+                8 => {
+                    self.address_n.push(is.read_uint32()?);
+                },
+                18 => {
+                    self.data = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                24 => {
+                    self.is_standart = ::std::option::Option::Some(is.read_bool()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.address_n {
+            my_size += ::protobuf::rt::uint32_size(1, *value);
+        };
+        if let Some(v) = self.data.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(2, &v);
+        }
+        if let Some(v) = self.is_standart {
+            my_size += 1 + 1;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        for v in &self.address_n {
+            os.write_uint32(1, *v)?;
+        };
+        if let Some(v) = self.data.as_ref() {
+            os.write_bytes(2, v)?;
+        }
+        if let Some(v) = self.is_standart {
+            os.write_bool(3, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> SlhDsaSign {
+        SlhDsaSign::new()
+    }
+
+    fn clear(&mut self) {
+        self.address_n.clear();
+        self.data = ::std::option::Option::None;
+        self.is_standart = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static SlhDsaSign {
+        static instance: SlhDsaSign = SlhDsaSign {
+            address_n: ::std::vec::Vec::new(),
+            data: ::std::option::Option::None,
+            is_standart: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for SlhDsaSign {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("SlhDsaSign").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for SlhDsaSign {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for SlhDsaSign {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hw.trezor.messages.common.SlhDsaSignature)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct SlhDsaSignature {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaSignature.signature)
+    pub signature: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.SlhDsaSignature.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a SlhDsaSignature {
+    fn default() -> &'a SlhDsaSignature {
+        <SlhDsaSignature as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl SlhDsaSignature {
+    pub fn new() -> SlhDsaSignature {
+        ::std::default::Default::default()
+    }
+
+    // required bytes signature = 1;
+
+    pub fn signature(&self) -> &[u8] {
+        match self.signature.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_signature(&mut self) {
+        self.signature = ::std::option::Option::None;
+    }
+
+    pub fn has_signature(&self) -> bool {
+        self.signature.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_signature(&mut self, v: ::std::vec::Vec<u8>) {
+        self.signature = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_signature(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.signature.is_none() {
+            self.signature = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.signature.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_signature(&mut self) -> ::std::vec::Vec<u8> {
+        self.signature.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "signature",
+            |m: &SlhDsaSignature| { &m.signature },
+            |m: &mut SlhDsaSignature| { &mut m.signature },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SlhDsaSignature>(
+            "SlhDsaSignature",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for SlhDsaSignature {
+    const NAME: &'static str = "SlhDsaSignature";
+
+    fn is_initialized(&self) -> bool {
+        if self.signature.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.signature = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.signature.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(1, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.signature.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> SlhDsaSignature {
+        SlhDsaSignature::new()
+    }
+
+    fn clear(&mut self) {
+        self.signature = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static SlhDsaSignature {
+        static instance: SlhDsaSignature = SlhDsaSignature {
+            signature: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for SlhDsaSignature {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("SlhDsaSignature").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for SlhDsaSignature {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for SlhDsaSignature {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
 static file_descriptor_proto_data: &'static [u8] = b"\
     \n\x15messages-common.proto\x12\x19hw.trezor.messages.common\x1a\roption\
     s.proto\"%\n\x07Success\x12\x1a\n\x07message\x18\x01\x20\x01(\t:\0R\x07m\
@@ -4462,12 +4885,16 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x01\x20\x02(\rR\x08coinType\x12\x16\n\x06amount\x18\x02\x20\x02(\tR\x06\
     amount\x12\x18\n\x07address\x18\x03\x20\x02(\tR\x07address\x12\x1b\n\tad\
     dress_n\x18\x04\x20\x03(\rR\x08addressN\x12\x10\n\x03mac\x18\x05\x20\x02\
-    (\x0cR\x03macJ\x04\x08\x04\x10\x05\"\\\n\x0bShrincsSign\x12\x1b\n\taddre\
-    ss_n\x18\x01\x20\x03(\rR\x08addressN\x12\x12\n\x04data\x18\x02\x20\x01(\
-    \x0cR\x04data\x12\x1c\n\tstateless\x18\x03\x20\x02(\x08R\tstateless\"0\n\
-    \x10ShrincsSignature\x12\x1c\n\tsignature\x18\x01\x20\x02(\x0cR\tsignatu\
-    reB>\n#com.satoshilabs.trezor.lib.protobufB\x13TrezorMessageCommon\x80\
-    \xa6\x1d\x01\
+    (\x0cR\x03macJ\x04\x08\x04\x10\x05\"n\n\x0bShrincsSign\x12\x1b\n\taddres\
+    s_n\x18\x01\x20\x03(\rR\x08addressN\x12\x12\n\x04data\x18\x02\x20\x02(\
+    \x0cR\x04data\x12\x1c\n\tstateless\x18\x03\x20\x02(\x08R\tstateless\x12\
+    \x10\n\x03swn\x18\x04\x20\x01(\rR\x03swn\"0\n\x10ShrincsSignature\x12\
+    \x1c\n\tsignature\x18\x01\x20\x02(\x0cR\tsignature\"^\n\nSlhDsaSign\x12\
+    \x1b\n\taddress_n\x18\x01\x20\x03(\rR\x08addressN\x12\x12\n\x04data\x18\
+    \x02\x20\x02(\x0cR\x04data\x12\x1f\n\x0bis_standart\x18\x03\x20\x02(\x08\
+    R\nisStandart\"/\n\x0fSlhDsaSignature\x12\x1c\n\tsignature\x18\x01\x20\
+    \x02(\x0cR\tsignatureB>\n#com.satoshilabs.trezor.lib.protobufB\x13Trezor\
+    MessageCommon\x80\xa6\x1d\x01\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -4486,7 +4913,7 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
         let generated_file_descriptor = generated_file_descriptor_lazy.get(|| {
             let mut deps = ::std::vec::Vec::with_capacity(1);
             deps.push(super::options::file_descriptor().clone());
-            let mut messages = ::std::vec::Vec::with_capacity(19);
+            let mut messages = ::std::vec::Vec::with_capacity(21);
             messages.push(Success::generated_message_descriptor_data());
             messages.push(Failure::generated_message_descriptor_data());
             messages.push(ButtonRequest::generated_message_descriptor_data());
@@ -4501,6 +4928,8 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(PaymentRequest::generated_message_descriptor_data());
             messages.push(ShrincsSign::generated_message_descriptor_data());
             messages.push(ShrincsSignature::generated_message_descriptor_data());
+            messages.push(SlhDsaSign::generated_message_descriptor_data());
+            messages.push(SlhDsaSignature::generated_message_descriptor_data());
             messages.push(payment_request::PaymentRequestMemo::generated_message_descriptor_data());
             messages.push(payment_request::TextMemo::generated_message_descriptor_data());
             messages.push(payment_request::TextDetailsMemo::generated_message_descriptor_data());

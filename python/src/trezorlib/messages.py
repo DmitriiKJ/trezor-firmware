@@ -769,6 +769,8 @@ class MessageType(IntEnum):
     Telemetry = 1101
     ShrincsSign = 1102
     ShrincsSignature = 1103
+    SlhDsaSign = 1104
+    SlhDsaSignature = 1105
 
 
 class BenchmarkListNames(protobuf.MessageType):
@@ -1014,24 +1016,61 @@ class ShrincsSign(protobuf.MessageType):
     MESSAGE_WIRE_TYPE = 1102
     FIELDS = {
         1: protobuf.Field("address_n", "uint32", repeated=True, required=False, default=None),
-        2: protobuf.Field("data", "bytes", repeated=False, required=False, default=None),
+        2: protobuf.Field("data", "bytes", repeated=False, required=True),
         3: protobuf.Field("stateless", "bool", repeated=False, required=True),
+        4: protobuf.Field("swn", "uint32", repeated=False, required=False, default=None),
     }
 
     def __init__(
         self,
         *,
+        data: "bytes",
         stateless: "bool",
         address_n: Optional[Sequence["int"]] = None,
-        data: Optional["bytes"] = None,
+        swn: Optional["int"] = None,
     ) -> None:
         self.address_n: Sequence["int"] = address_n if address_n is not None else []
-        self.stateless = stateless
         self.data = data
+        self.stateless = stateless
+        self.swn = swn
 
 
 class ShrincsSignature(protobuf.MessageType):
     MESSAGE_WIRE_TYPE = 1103
+    FIELDS = {
+        1: protobuf.Field("signature", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        signature: "bytes",
+    ) -> None:
+        self.signature = signature
+
+
+class SlhDsaSign(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1104
+    FIELDS = {
+        1: protobuf.Field("address_n", "uint32", repeated=True, required=False, default=None),
+        2: protobuf.Field("data", "bytes", repeated=False, required=True),
+        3: protobuf.Field("is_standart", "bool", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        data: "bytes",
+        is_standart: "bool",
+        address_n: Optional[Sequence["int"]] = None,
+    ) -> None:
+        self.address_n: Sequence["int"] = address_n if address_n is not None else []
+        self.data = data
+        self.is_standart = is_standart
+
+
+class SlhDsaSignature(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1105
     FIELDS = {
         1: protobuf.Field("signature", "bytes", repeated=False, required=True),
     }

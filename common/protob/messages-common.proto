@@ -225,10 +225,21 @@ message PaymentRequest {
 
 message ShrincsSign {
     repeated uint32 address_n = 1; 
-    optional bytes data = 2;
+    required bytes data = 2;
     required bool stateless = 3;
+    optional uint32 swn = 4;
 }
 
 message ShrincsSignature {
+    required bytes signature = 1;
+}
+
+message SlhDsaSign {
+    repeated uint32 address_n = 1; 
+    required bytes data = 2;
+    required bool is_standart = 3;
+}
+
+message SlhDsaSignature {
     required bytes signature = 1;
 }

@@ -603,6 +603,10 @@ pub enum MessageType {
     MessageType_ShrincsSign = 1102,
     // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_ShrincsSignature)
     MessageType_ShrincsSignature = 1103,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_SlhDsaSign)
+    MessageType_SlhDsaSign = 1104,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_SlhDsaSignature)
+    MessageType_SlhDsaSignature = 1105,
 }
 
 impl ::protobuf::Enum for MessageType {
@@ -902,6 +906,8 @@ impl ::protobuf::Enum for MessageType {
             1101 => ::std::option::Option::Some(MessageType::MessageType_Telemetry),
             1102 => ::std::option::Option::Some(MessageType::MessageType_ShrincsSign),
             1103 => ::std::option::Option::Some(MessageType::MessageType_ShrincsSignature),
+            1104 => ::std::option::Option::Some(MessageType::MessageType_SlhDsaSign),
+            1105 => ::std::option::Option::Some(MessageType::MessageType_SlhDsaSignature),
             _ => ::std::option::Option::None
         }
     }
@@ -1196,6 +1202,8 @@ impl ::protobuf::Enum for MessageType {
             "MessageType_Telemetry" => ::std::option::Option::Some(MessageType::MessageType_Telemetry),
             "MessageType_ShrincsSign" => ::std::option::Option::Some(MessageType::MessageType_ShrincsSign),
             "MessageType_ShrincsSignature" => ::std::option::Option::Some(MessageType::MessageType_ShrincsSignature),
+            "MessageType_SlhDsaSign" => ::std::option::Option::Some(MessageType::MessageType_SlhDsaSign),
+            "MessageType_SlhDsaSignature" => ::std::option::Option::Some(MessageType::MessageType_SlhDsaSignature),
             _ => ::std::option::Option::None
         }
     }
@@ -1489,6 +1497,8 @@ impl ::protobuf::Enum for MessageType {
         MessageType::MessageType_Telemetry,
         MessageType::MessageType_ShrincsSign,
         MessageType::MessageType_ShrincsSignature,
+        MessageType::MessageType_SlhDsaSign,
+        MessageType::MessageType_SlhDsaSignature,
     ];
 }
 
@@ -1788,6 +1798,8 @@ impl ::protobuf::EnumFull for MessageType {
             MessageType::MessageType_Telemetry => 285,
             MessageType::MessageType_ShrincsSign => 286,
             MessageType::MessageType_ShrincsSignature => 287,
+            MessageType::MessageType_SlhDsaSign => 288,
+            MessageType::MessageType_SlhDsaSignature => 289,
         };
         Self::enum_descriptor().value_by_index(index)
     }
@@ -1806,7 +1818,7 @@ impl MessageType {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x0emessages.proto\x12\x12hw.trezor.messages\x1a\roptions.proto*\x8be\
+    \n\x0emessages.proto\x12\x12hw.trezor.messages\x1a\roptions.proto*\xd6e\
     \n\x0bMessageType\x12(\n\x16MessageType_Initialize\x10\0\x1a\x0c\xb0\xb5\
     \x18\x01\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12\x1e\n\x10MessageType_Ping\
     \x10\x01\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12%\n\x13MessageType_S\
@@ -2136,7 +2148,9 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12$\n\x15MessageType_Telemetry\x10\
     \xcd\x08\x1a\x08\x80\xa6\x1d\x01\x98\xb5\x18\x01\x12\"\n\x17MessageType_\
     ShrincsSign\x10\xce\x08\x1a\x04\x90\xb5\x18\x01\x12'\n\x1cMessageType_Sh\
-    rincsSignature\x10\xcf\x08\x1a\x04\x98\xb5\x18\x01\x1a\x08\xc8\xf3\x18\
+    rincsSignature\x10\xcf\x08\x1a\x04\x98\xb5\x18\x01\x12!\n\x16MessageType\
+    _SlhDsaSign\x10\xd0\x08\x1a\x04\x90\xb5\x18\x01\x12&\n\x1bMessageType_Sl\
+    hDsaSignature\x10\xd1\x08\x1a\x04\x98\xb5\x18\x01\x1a\x08\xc8\xf3\x18\
     \x01\xd0\xf3\x18\x01\"\x04\x08Z\x10\\\"\x04\x08G\x10J\"\x04\x08r\x10z\"\
     \x05\x08{\x10\x95\x01\"\x06\x08\xdb\x01\x10\xdb\x01\"\x06\x08\xe0\x01\
     \x10\xe0\x01\"\x06\x08\xac\x02\x10\xb0\x02\"\x06\x08\xb5\x02\x10\xb8\x02\

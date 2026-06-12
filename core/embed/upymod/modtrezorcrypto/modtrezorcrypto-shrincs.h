@@ -113,22 +113,22 @@ STATIC mp_obj_t mod_trezorcrypto_shrincs_sign_stateful(size_t n_args, const mp_o
         mp_raise_ValueError(MP_ERROR_TEXT("State q is too large"));
     }
 
+    uint32_t swn = mp_obj_get_int(args[3]);
+
     shrincs_progress_cb cb = NULL;
     mp_obj_t reporter = MP_OBJ_NULL;
-    if (n_args >= 4 && args[3] != mp_const_none) {
-        reporter = args[3];
+    if (n_args >= 4 && args[4] != mp_const_none) {
+        reporter = args[4];
         cb = shrincs_mp_progress_cb;
     }
 
-    mp_printf(&mp_plat_print, "shrincs: sign_stateful start, q=%u\n", state.q + 1);
     uint8_t signature[N + WOTS_SIGN_LEN + (state.q + 1) * N]; // ???
-    if (!shrincs_sign_stateful((const uint8_t*)msg_buf.buf, msg_buf.len, &sk, &state, signature, cb, reporter != MP_OBJ_NULL ? &reporter : NULL))
+    if (!shrincs_sign_stateful((const uint8_t*)msg_buf.buf, msg_buf.len, &sk, &state, signature, swn, cb, reporter != MP_OBJ_NULL ? &reporter : NULL))
     {
         mp_raise_ValueError(MP_ERROR_TEXT("Error while signing message"));
     }
 
-    mp_printf(&mp_plat_print, "shrincs: sign_stateful done\n");
-
+    memzero(sk_buf.buf, sk_buf.len);
     memzero(&sk, sizeof(sk));
 
     mp_obj_t res_items[2];
@@ -144,4 +144,4 @@ STATIC mp_obj_t mod_trezorcrypto_shrincs_sign_stateful(size_t n_args, const mp_o
     return mp_obj_new_tuple(2, res_items);
 }
 
-MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_trezorcrypto_shrincs_sign_stateful_obj, 3, 4, mod_trezorcrypto_shrincs_sign_stateful);
+MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_trezorcrypto_shrincs_sign_stateful_obj, 4, 5, mod_trezorcrypto_shrincs_sign_stateful);

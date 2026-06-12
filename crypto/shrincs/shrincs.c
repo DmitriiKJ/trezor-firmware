@@ -79,8 +79,7 @@ void shrincs_restore(const uint8_t* seed, PublicKey* out_pk, SecretKey* out_sk, 
     out_state->valid = 0;
 }
 
-uint32_t shrincs_sign_stateful(const uint8_t* message, uint32_t message_len, SecretKey* sk, State* state, uint8_t* out,
-                               shrincs_progress_cb cb, void *cb_userdata)
+uint32_t shrincs_sign_stateful(const uint8_t* message, uint32_t message_len, SecretKey* sk, State* state, uint8_t* out, uint32_t swn, shrincs_progress_cb cb, void *cb_userdata)
 {
     if (!state->valid) {
         return 0;
@@ -106,7 +105,7 @@ uint32_t shrincs_sign_stateful(const uint8_t* message, uint32_t message_len, Sec
 
     setLayerAddress(adrs, 0);
     setTreeAddress(adrs, 0, 0);
-    wots_sign(message, message_len, sk->seed, sk->prf, sk->pk.seed, sk->pk.root, &hash_ctx, adrs, q, 1, 0, out + N, cb, cb_userdata, 0, 700);
+    wots_sign(message, message_len, sk->seed, sk->prf, sk->pk.seed, sk->pk.root, &hash_ctx, adrs, q, 1, 0, out + N, swn, cb, cb_userdata, 0, 700);
     uxmss_auth_path(sk->seed, &hash_ctx, adrs, q, out + N + WOTS_SIGN_LEN, cb, cb_userdata, 700, 900);
 
     state->q = q;
@@ -166,7 +165,7 @@ uint32_t shrincs_sign_stateless(const uint8_t* message, uint32_t message_len, Se
     return 1;
 }
 
-uint32_t shrincs_verify_stateful(const uint8_t* message, uint32_t message_len, const uint8_t* sig, uint32_t sig_len, PublicKey* pk)
+uint32_t shrincs_verify_stateful(const uint8_t* message, uint32_t message_len, const uint8_t* sig, uint32_t sig_len, PublicKey* pk, uint32_t swn)
 {
     uint8_t adrs[32] = {0};
     uint8_t sl[N];
@@ -200,7 +199,7 @@ uint32_t shrincs_verify_stateful(const uint8_t* message, uint32_t message_len, c
     for (int j = 0; j < (last_sf_level ? 2 : 1); j++)
     {
         uint8_t sf[N];
-        uxmss_pk_from_sig(uxmss_sig, uxmss_sig + WOTS_SIGN_LEN, message, message_len, pk->root, &hash_ctx, adrs, last_sf_level ? HSF + j : q_raw, sf);
+        uxmss_pk_from_sig(uxmss_sig, uxmss_sig + WOTS_SIGN_LEN, message, message_len, pk->root, &hash_ctx, adrs, last_sf_level ? HSF + j : q_raw, sf, swn);
 
         uint8_t root[N];
         setTypeAndClear(adrs, ROOT);
@@ -321,11 +320,11 @@ uint32_t shrincs_verify_stateless(const uint8_t* message, uint32_t message_len, 
     return memcmp(root, pk->root, N) == 0;
 }
 
-uint32_t shrincs_verify(const uint8_t* message, uint32_t message_len, const uint8_t* sig, uint32_t sig_len, PublicKey* pk)
+uint32_t shrincs_verify(const uint8_t* message, uint32_t message_len, const uint8_t* sig, uint32_t sig_len, PublicKey* pk, uint32_t swn)
 {
     if (sig_len <= MAX_SF_SIZE)
     {
-        return shrincs_verify_stateful(message, message_len, sig, sig_len, pk);
+        return shrincs_verify_stateful(message, message_len, sig, sig_len, pk, swn);
     }
     else
     {

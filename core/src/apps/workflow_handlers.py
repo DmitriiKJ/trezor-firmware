@@ -82,6 +82,9 @@ def _find_message_handler_module(msg_type: int) -> str:
         
     if msg_type == MessageType.ShrincsSign:
         return "apps.shrincs.shrincs_sign"
+    
+    if msg_type == MessageType.SlhDsaSign:
+        return "apps.slh_dsa.slh_dsa_sign"
 
     # bitcoin
     if msg_type == MessageType.AuthorizeCoinJoin:

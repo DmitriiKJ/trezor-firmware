@@ -82,6 +82,7 @@ static void wrapped_ui_wait_callback(uint32_t current, uint32_t total) {
 #endif
 
 #include "modtrezorcrypto-shrincs.h"
+#include "modtrezorcrypto-slh-dsa.h"
 
 
 STATIC const mp_rom_map_elem_t mp_module_trezorcrypto_globals_table[] = {
@@ -153,6 +154,7 @@ STATIC const mp_rom_map_elem_t mp_module_trezorcrypto_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR_shrincs_sign_stateless), MP_ROM_PTR(&mod_trezorcrypto_shrincs_sign_stateless_obj) },
     { MP_ROM_QSTR(MP_QSTR_shrincs_sign_stateful),  MP_ROM_PTR(&mod_trezorcrypto_shrincs_sign_stateful_obj) },
     { MP_ROM_QSTR(MP_QSTR_shrincs_expand_sk),  MP_ROM_PTR(&mod_trezorcrypto_shrincs_expand_sk_obj) },
+    { MP_ROM_QSTR(MP_QSTR_slh_dsa_sign),  MP_ROM_PTR(&mod_trezorcrypto_slh_dsa_sign_obj) },
 };
 STATIC MP_DEFINE_CONST_DICT(mp_module_trezorcrypto_globals,
                             mp_module_trezorcrypto_globals_table);

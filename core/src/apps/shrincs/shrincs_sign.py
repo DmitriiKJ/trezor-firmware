@@ -15,11 +15,11 @@ async def shrincs_sign(msg: ShrincsSign) -> ShrincsSignature:
     global CACHED_SK
     from trezor import crypto
 
-    await raise_if_not_confirmed(
-        trezorui_api.confirm_shrincs(),
-        "shrincs_sign",
-        ButtonRequestType.Other,
-    )
+    # await raise_if_not_confirmed(
+    #     trezorui_api.confirm_shrincs(),
+    #     "shrincs_sign",
+    #     ButtonRequestType.Other,
+    # )
 
     if CACHED_SK is None:
         # keychain = await get_keychain("secp256k1", [AlwaysMatchingSchema])
@@ -54,7 +54,13 @@ async def shrincs_sign(msg: ShrincsSign) -> ShrincsSignature:
 
         current_state = (1, 1)
 
-        signature_bytes, new_state = crypto.shrincs_sign_stateful(CACHED_SK, current_state, msg.data, reporter)
+        
+        if msg.swn is None:
+            swn = 140
+        else:
+            swn = msg.swn
+
+        signature_bytes, new_state = crypto.shrincs_sign_stateful(CACHED_SK, current_state, msg.data, swn, reporter)
         prog.report(1000, "Signing... 100%")
 
         new_state_bytes = struct.pack("<II", *new_state)
