@@ -216,7 +216,7 @@ void wots_sign(const uint8_t* message, uint32_t message_len, const uint8_t* sk_s
     uint8_t msg[L];
     uint16_t mid = (uint16_t)((uint32_t)prog_start + ((uint32_t)(prog_end - prog_start) * 8 / 10));
     uint32_t ctr = wots_grind(digest, N, hash_ctx, adrs, keypair, msg, sf, swn, cb, cb_ud, prog_start, mid);
-    cb(mid, cb_ud);
+    if (cb) cb(mid, cb_ud);
 
     memcpy(out, r, R_LEN);
     uint32_t offset = R_LEN;
