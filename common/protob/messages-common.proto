@@ -234,12 +234,29 @@ message ShrincsSignature {
     required bytes signature = 1;
 }
 
+message ShrincsKeyGen {
+    required bytes bytes = 1;
+}
+
+message ShrincsSk {
+    required bytes sk_bytes = 1;
+}
+
 message SlhDsaSign {
     repeated uint32 address_n = 1; 
     required bytes data = 2;
-    required bool is_standart = 3;
+    required bool is_standard = 3;
 }
 
 message SlhDsaSignature {
     required bytes signature = 1;
+}
+
+message SlhDsaKeyGen {
+    required bytes bytes = 1;
+    required bool is_standard = 2;
+}
+
+message SlhDsaSk {
+    required bytes sk_bytes = 1;
 }

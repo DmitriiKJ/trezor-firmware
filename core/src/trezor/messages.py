@@ -311,16 +311,44 @@ if TYPE_CHECKING:
         def is_type_of(cls, msg: Any) -> TypeGuard["ShrincsSignature"]:
             return isinstance(msg, cls)
 
+    class ShrincsKeyGen(protobuf.MessageType):
+        bytes: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            bytes: "AnyBytes",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["ShrincsKeyGen"]:
+            return isinstance(msg, cls)
+
+    class ShrincsSk(protobuf.MessageType):
+        sk_bytes: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            sk_bytes: "AnyBytes",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["ShrincsSk"]:
+            return isinstance(msg, cls)
+
     class SlhDsaSign(protobuf.MessageType):
         address_n: "list[int]"
         data: "AnyBytes"
-        is_standart: "bool"
+        is_standard: "bool"
 
         def __init__(
             self,
             *,
             data: "AnyBytes",
-            is_standart: "bool",
+            is_standard: "bool",
             address_n: "list[int] | None" = None,
         ) -> None:
             pass
@@ -341,6 +369,36 @@ if TYPE_CHECKING:
 
         @classmethod
         def is_type_of(cls, msg: Any) -> TypeGuard["SlhDsaSignature"]:
+            return isinstance(msg, cls)
+
+    class SlhDsaKeyGen(protobuf.MessageType):
+        bytes: "AnyBytes"
+        is_standard: "bool"
+
+        def __init__(
+            self,
+            *,
+            bytes: "AnyBytes",
+            is_standard: "bool",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["SlhDsaKeyGen"]:
+            return isinstance(msg, cls)
+
+    class SlhDsaSk(protobuf.MessageType):
+        sk_bytes: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            sk_bytes: "AnyBytes",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["SlhDsaSk"]:
             return isinstance(msg, cls)
 
     class PaymentRequestMemo(protobuf.MessageType):

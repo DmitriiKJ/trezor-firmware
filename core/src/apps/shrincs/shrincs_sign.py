@@ -1,4 +1,4 @@
-from trezor.messages import ShrincsSignature
+from trezor.messages import ShrincsSignature, ShrincsKeyGen, ShrincsSk
 import ubinascii
 import trezorui_api
 from trezor.enums import ButtonRequestType
@@ -67,3 +67,13 @@ async def shrincs_sign(msg: ShrincsSign) -> ShrincsSignature:
         config.set(APP_ID, STATE_KEY, new_state_bytes)
 
     return ShrincsSignature(signature=signature_bytes)
+
+async def shrincs_key_gen(msg: ShrincsKeyGen) -> ShrincsSk:
+    from trezor import crypto
+
+    prog = show_progress("Keygen...", title="SHRINCS", indeterminate=True)
+    prog.report(0)
+
+    sk_bytes = crypto.shrincs_expand_sk(msg.bytes)
+
+    return ShrincsSk(sk_bytes=sk_bytes)

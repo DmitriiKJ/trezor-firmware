@@ -108,8 +108,12 @@ trezor_message_impl! {
     Telemetry => MessageType_Telemetry,
     ShrincsSign => MessageType_ShrincsSign,
     ShrincsSignature => MessageType_ShrincsSignature,
+    ShrincsKeyGen => MessageType_ShrincsKeyGen,
+    ShrincsSk => MessageType_ShrincsSk,
     SlhDsaSign => MessageType_SlhDsaSign,
     SlhDsaSignature => MessageType_SlhDsaSignature,
+    SlhDsaKeyGen => MessageType_SlhDsaKeyGen,
+    SlhDsaSk => MessageType_SlhDsaSk,
 }
 
 #[cfg(feature = "bitcoin")]

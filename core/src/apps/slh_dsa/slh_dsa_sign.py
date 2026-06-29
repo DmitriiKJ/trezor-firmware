@@ -1,4 +1,4 @@
-from trezor.messages import SlhDsaSignature
+from trezor.messages import SlhDsaSignature, SlhDsaKeyGen, SlhDsaSk
 import ubinascii
 import trezorui_api
 from trezor.enums import ButtonRequestType
@@ -42,7 +42,17 @@ async def slh_dsa_sign(msg: SlhDsaSign) -> SlhDsaSignature:
     def reporter(value: int) -> None:
         prog.report(value, "Signing... {}%".format(value // 10))
 
-    signature_bytes = crypto.slh_dsa_sign(CACHED_SK, msg.data, msg.is_standart, reporter)
+    signature_bytes = crypto.slh_dsa_sign(CACHED_SK, msg.data, msg.is_standard, reporter)
     prog.report(1000, "Signing... 100%")
 
     return SlhDsaSignature(signature=signature_bytes)
+
+async def slh_dsa_key_gen(msg: SlhDsaKeyGen) -> SlhDsaSk:
+    from trezor import crypto
+
+    prog = show_progress("Keygen...", title="SlhDsa", indeterminate=True)
+    prog.report(0)
+
+    sk_bytes = crypto.slh_dsa_gen_sk(msg.bytes, msg.is_standard)
+
+    return SlhDsaSk(sk_bytes=sk_bytes)

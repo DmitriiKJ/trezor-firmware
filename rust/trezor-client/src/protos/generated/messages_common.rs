@@ -4428,6 +4428,328 @@ impl ::protobuf::reflect::ProtobufValue for ShrincsSignature {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
+// @@protoc_insertion_point(message:hw.trezor.messages.common.ShrincsKeyGen)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct ShrincsKeyGen {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.ShrincsKeyGen.bytes)
+    pub bytes: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.ShrincsKeyGen.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a ShrincsKeyGen {
+    fn default() -> &'a ShrincsKeyGen {
+        <ShrincsKeyGen as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl ShrincsKeyGen {
+    pub fn new() -> ShrincsKeyGen {
+        ::std::default::Default::default()
+    }
+
+    // required bytes bytes = 1;
+
+    pub fn bytes(&self) -> &[u8] {
+        match self.bytes.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_bytes(&mut self) {
+        self.bytes = ::std::option::Option::None;
+    }
+
+    pub fn has_bytes(&self) -> bool {
+        self.bytes.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_bytes(&mut self, v: ::std::vec::Vec<u8>) {
+        self.bytes = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_bytes(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.bytes.is_none() {
+            self.bytes = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.bytes.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_bytes(&mut self) -> ::std::vec::Vec<u8> {
+        self.bytes.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "bytes",
+            |m: &ShrincsKeyGen| { &m.bytes },
+            |m: &mut ShrincsKeyGen| { &mut m.bytes },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ShrincsKeyGen>(
+            "ShrincsKeyGen",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for ShrincsKeyGen {
+    const NAME: &'static str = "ShrincsKeyGen";
+
+    fn is_initialized(&self) -> bool {
+        if self.bytes.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.bytes = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.bytes.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(1, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.bytes.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> ShrincsKeyGen {
+        ShrincsKeyGen::new()
+    }
+
+    fn clear(&mut self) {
+        self.bytes = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static ShrincsKeyGen {
+        static instance: ShrincsKeyGen = ShrincsKeyGen {
+            bytes: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for ShrincsKeyGen {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("ShrincsKeyGen").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for ShrincsKeyGen {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for ShrincsKeyGen {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hw.trezor.messages.common.ShrincsSk)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct ShrincsSk {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.ShrincsSk.sk_bytes)
+    pub sk_bytes: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.ShrincsSk.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a ShrincsSk {
+    fn default() -> &'a ShrincsSk {
+        <ShrincsSk as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl ShrincsSk {
+    pub fn new() -> ShrincsSk {
+        ::std::default::Default::default()
+    }
+
+    // required bytes sk_bytes = 1;
+
+    pub fn sk_bytes(&self) -> &[u8] {
+        match self.sk_bytes.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_sk_bytes(&mut self) {
+        self.sk_bytes = ::std::option::Option::None;
+    }
+
+    pub fn has_sk_bytes(&self) -> bool {
+        self.sk_bytes.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_sk_bytes(&mut self, v: ::std::vec::Vec<u8>) {
+        self.sk_bytes = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_sk_bytes(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.sk_bytes.is_none() {
+            self.sk_bytes = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.sk_bytes.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_sk_bytes(&mut self) -> ::std::vec::Vec<u8> {
+        self.sk_bytes.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "sk_bytes",
+            |m: &ShrincsSk| { &m.sk_bytes },
+            |m: &mut ShrincsSk| { &mut m.sk_bytes },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ShrincsSk>(
+            "ShrincsSk",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for ShrincsSk {
+    const NAME: &'static str = "ShrincsSk";
+
+    fn is_initialized(&self) -> bool {
+        if self.sk_bytes.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.sk_bytes = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.sk_bytes.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(1, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.sk_bytes.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> ShrincsSk {
+        ShrincsSk::new()
+    }
+
+    fn clear(&mut self) {
+        self.sk_bytes = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static ShrincsSk {
+        static instance: ShrincsSk = ShrincsSk {
+            sk_bytes: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for ShrincsSk {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("ShrincsSk").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for ShrincsSk {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for ShrincsSk {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
 // @@protoc_insertion_point(message:hw.trezor.messages.common.SlhDsaSign)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct SlhDsaSign {
@@ -4436,8 +4758,8 @@ pub struct SlhDsaSign {
     pub address_n: ::std::vec::Vec<u32>,
     // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaSign.data)
     pub data: ::std::option::Option<::std::vec::Vec<u8>>,
-    // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaSign.is_standart)
-    pub is_standart: ::std::option::Option<bool>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaSign.is_standard)
+    pub is_standard: ::std::option::Option<bool>,
     // special fields
     // @@protoc_insertion_point(special_field:hw.trezor.messages.common.SlhDsaSign.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -4490,23 +4812,23 @@ impl SlhDsaSign {
         self.data.take().unwrap_or_else(|| ::std::vec::Vec::new())
     }
 
-    // required bool is_standart = 3;
+    // required bool is_standard = 3;
 
-    pub fn is_standart(&self) -> bool {
-        self.is_standart.unwrap_or(false)
+    pub fn is_standard(&self) -> bool {
+        self.is_standard.unwrap_or(false)
     }
 
-    pub fn clear_is_standart(&mut self) {
-        self.is_standart = ::std::option::Option::None;
+    pub fn clear_is_standard(&mut self) {
+        self.is_standard = ::std::option::Option::None;
     }
 
-    pub fn has_is_standart(&self) -> bool {
-        self.is_standart.is_some()
+    pub fn has_is_standard(&self) -> bool {
+        self.is_standard.is_some()
     }
 
     // Param is passed by value, moved
-    pub fn set_is_standart(&mut self, v: bool) {
-        self.is_standart = ::std::option::Option::Some(v);
+    pub fn set_is_standard(&mut self, v: bool) {
+        self.is_standard = ::std::option::Option::Some(v);
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
@@ -4523,9 +4845,9 @@ impl SlhDsaSign {
             |m: &mut SlhDsaSign| { &mut m.data },
         ));
         fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
-            "is_standart",
-            |m: &SlhDsaSign| { &m.is_standart },
-            |m: &mut SlhDsaSign| { &mut m.is_standart },
+            "is_standard",
+            |m: &SlhDsaSign| { &m.is_standard },
+            |m: &mut SlhDsaSign| { &mut m.is_standard },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SlhDsaSign>(
             "SlhDsaSign",
@@ -4542,7 +4864,7 @@ impl ::protobuf::Message for SlhDsaSign {
         if self.data.is_none() {
             return false;
         }
-        if self.is_standart.is_none() {
+        if self.is_standard.is_none() {
             return false;
         }
         true
@@ -4561,7 +4883,7 @@ impl ::protobuf::Message for SlhDsaSign {
                     self.data = ::std::option::Option::Some(is.read_bytes()?);
                 },
                 24 => {
-                    self.is_standart = ::std::option::Option::Some(is.read_bool()?);
+                    self.is_standard = ::std::option::Option::Some(is.read_bool()?);
                 },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
@@ -4581,7 +4903,7 @@ impl ::protobuf::Message for SlhDsaSign {
         if let Some(v) = self.data.as_ref() {
             my_size += ::protobuf::rt::bytes_size(2, &v);
         }
-        if let Some(v) = self.is_standart {
+        if let Some(v) = self.is_standard {
             my_size += 1 + 1;
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
@@ -4596,7 +4918,7 @@ impl ::protobuf::Message for SlhDsaSign {
         if let Some(v) = self.data.as_ref() {
             os.write_bytes(2, v)?;
         }
-        if let Some(v) = self.is_standart {
+        if let Some(v) = self.is_standard {
             os.write_bool(3, v)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
@@ -4618,7 +4940,7 @@ impl ::protobuf::Message for SlhDsaSign {
     fn clear(&mut self) {
         self.address_n.clear();
         self.data = ::std::option::Option::None;
-        self.is_standart = ::std::option::Option::None;
+        self.is_standard = ::std::option::Option::None;
         self.special_fields.clear();
     }
 
@@ -4626,7 +4948,7 @@ impl ::protobuf::Message for SlhDsaSign {
         static instance: SlhDsaSign = SlhDsaSign {
             address_n: ::std::vec::Vec::new(),
             data: ::std::option::Option::None,
-            is_standart: ::std::option::Option::None,
+            is_standard: ::std::option::Option::None,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -4811,6 +5133,368 @@ impl ::protobuf::reflect::ProtobufValue for SlhDsaSignature {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
+// @@protoc_insertion_point(message:hw.trezor.messages.common.SlhDsaKeyGen)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct SlhDsaKeyGen {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaKeyGen.bytes)
+    pub bytes: ::std::option::Option<::std::vec::Vec<u8>>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaKeyGen.is_standard)
+    pub is_standard: ::std::option::Option<bool>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.SlhDsaKeyGen.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a SlhDsaKeyGen {
+    fn default() -> &'a SlhDsaKeyGen {
+        <SlhDsaKeyGen as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl SlhDsaKeyGen {
+    pub fn new() -> SlhDsaKeyGen {
+        ::std::default::Default::default()
+    }
+
+    // required bytes bytes = 1;
+
+    pub fn bytes(&self) -> &[u8] {
+        match self.bytes.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_bytes(&mut self) {
+        self.bytes = ::std::option::Option::None;
+    }
+
+    pub fn has_bytes(&self) -> bool {
+        self.bytes.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_bytes(&mut self, v: ::std::vec::Vec<u8>) {
+        self.bytes = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_bytes(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.bytes.is_none() {
+            self.bytes = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.bytes.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_bytes(&mut self) -> ::std::vec::Vec<u8> {
+        self.bytes.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    // required bool is_standard = 2;
+
+    pub fn is_standard(&self) -> bool {
+        self.is_standard.unwrap_or(false)
+    }
+
+    pub fn clear_is_standard(&mut self) {
+        self.is_standard = ::std::option::Option::None;
+    }
+
+    pub fn has_is_standard(&self) -> bool {
+        self.is_standard.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_is_standard(&mut self, v: bool) {
+        self.is_standard = ::std::option::Option::Some(v);
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "bytes",
+            |m: &SlhDsaKeyGen| { &m.bytes },
+            |m: &mut SlhDsaKeyGen| { &mut m.bytes },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "is_standard",
+            |m: &SlhDsaKeyGen| { &m.is_standard },
+            |m: &mut SlhDsaKeyGen| { &mut m.is_standard },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SlhDsaKeyGen>(
+            "SlhDsaKeyGen",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for SlhDsaKeyGen {
+    const NAME: &'static str = "SlhDsaKeyGen";
+
+    fn is_initialized(&self) -> bool {
+        if self.bytes.is_none() {
+            return false;
+        }
+        if self.is_standard.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.bytes = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                16 => {
+                    self.is_standard = ::std::option::Option::Some(is.read_bool()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.bytes.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(1, &v);
+        }
+        if let Some(v) = self.is_standard {
+            my_size += 1 + 1;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.bytes.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        if let Some(v) = self.is_standard {
+            os.write_bool(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> SlhDsaKeyGen {
+        SlhDsaKeyGen::new()
+    }
+
+    fn clear(&mut self) {
+        self.bytes = ::std::option::Option::None;
+        self.is_standard = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static SlhDsaKeyGen {
+        static instance: SlhDsaKeyGen = SlhDsaKeyGen {
+            bytes: ::std::option::Option::None,
+            is_standard: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for SlhDsaKeyGen {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("SlhDsaKeyGen").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for SlhDsaKeyGen {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for SlhDsaKeyGen {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hw.trezor.messages.common.SlhDsaSk)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct SlhDsaSk {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.SlhDsaSk.sk_bytes)
+    pub sk_bytes: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.SlhDsaSk.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a SlhDsaSk {
+    fn default() -> &'a SlhDsaSk {
+        <SlhDsaSk as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl SlhDsaSk {
+    pub fn new() -> SlhDsaSk {
+        ::std::default::Default::default()
+    }
+
+    // required bytes sk_bytes = 1;
+
+    pub fn sk_bytes(&self) -> &[u8] {
+        match self.sk_bytes.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_sk_bytes(&mut self) {
+        self.sk_bytes = ::std::option::Option::None;
+    }
+
+    pub fn has_sk_bytes(&self) -> bool {
+        self.sk_bytes.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_sk_bytes(&mut self, v: ::std::vec::Vec<u8>) {
+        self.sk_bytes = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_sk_bytes(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.sk_bytes.is_none() {
+            self.sk_bytes = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.sk_bytes.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_sk_bytes(&mut self) -> ::std::vec::Vec<u8> {
+        self.sk_bytes.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "sk_bytes",
+            |m: &SlhDsaSk| { &m.sk_bytes },
+            |m: &mut SlhDsaSk| { &mut m.sk_bytes },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SlhDsaSk>(
+            "SlhDsaSk",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for SlhDsaSk {
+    const NAME: &'static str = "SlhDsaSk";
+
+    fn is_initialized(&self) -> bool {
+        if self.sk_bytes.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.sk_bytes = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.sk_bytes.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(1, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.sk_bytes.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> SlhDsaSk {
+        SlhDsaSk::new()
+    }
+
+    fn clear(&mut self) {
+        self.sk_bytes = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static SlhDsaSk {
+        static instance: SlhDsaSk = SlhDsaSk {
+            sk_bytes: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for SlhDsaSk {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("SlhDsaSk").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for SlhDsaSk {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for SlhDsaSk {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
 static file_descriptor_proto_data: &'static [u8] = b"\
     \n\x15messages-common.proto\x12\x19hw.trezor.messages.common\x1a\roption\
     s.proto\"%\n\x07Success\x12\x1a\n\x07message\x18\x01\x20\x01(\t:\0R\x07m\
@@ -4889,12 +5573,17 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     s_n\x18\x01\x20\x03(\rR\x08addressN\x12\x12\n\x04data\x18\x02\x20\x02(\
     \x0cR\x04data\x12\x1c\n\tstateless\x18\x03\x20\x02(\x08R\tstateless\x12\
     \x10\n\x03swn\x18\x04\x20\x01(\rR\x03swn\"0\n\x10ShrincsSignature\x12\
-    \x1c\n\tsignature\x18\x01\x20\x02(\x0cR\tsignature\"^\n\nSlhDsaSign\x12\
+    \x1c\n\tsignature\x18\x01\x20\x02(\x0cR\tsignature\"%\n\rShrincsKeyGen\
+    \x12\x14\n\x05bytes\x18\x01\x20\x02(\x0cR\x05bytes\"&\n\tShrincsSk\x12\
+    \x19\n\x08sk_bytes\x18\x01\x20\x02(\x0cR\x07skBytes\"^\n\nSlhDsaSign\x12\
     \x1b\n\taddress_n\x18\x01\x20\x03(\rR\x08addressN\x12\x12\n\x04data\x18\
-    \x02\x20\x02(\x0cR\x04data\x12\x1f\n\x0bis_standart\x18\x03\x20\x02(\x08\
-    R\nisStandart\"/\n\x0fSlhDsaSignature\x12\x1c\n\tsignature\x18\x01\x20\
-    \x02(\x0cR\tsignatureB>\n#com.satoshilabs.trezor.lib.protobufB\x13Trezor\
-    MessageCommon\x80\xa6\x1d\x01\
+    \x02\x20\x02(\x0cR\x04data\x12\x1f\n\x0bis_standard\x18\x03\x20\x02(\x08\
+    R\nisStandard\"/\n\x0fSlhDsaSignature\x12\x1c\n\tsignature\x18\x01\x20\
+    \x02(\x0cR\tsignature\"E\n\x0cSlhDsaKeyGen\x12\x14\n\x05bytes\x18\x01\
+    \x20\x02(\x0cR\x05bytes\x12\x1f\n\x0bis_standard\x18\x02\x20\x02(\x08R\n\
+    isStandard\"%\n\x08SlhDsaSk\x12\x19\n\x08sk_bytes\x18\x01\x20\x02(\x0cR\
+    \x07skBytesB>\n#com.satoshilabs.trezor.lib.protobufB\x13TrezorMessageCom\
+    mon\x80\xa6\x1d\x01\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -4913,7 +5602,7 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
         let generated_file_descriptor = generated_file_descriptor_lazy.get(|| {
             let mut deps = ::std::vec::Vec::with_capacity(1);
             deps.push(super::options::file_descriptor().clone());
-            let mut messages = ::std::vec::Vec::with_capacity(21);
+            let mut messages = ::std::vec::Vec::with_capacity(25);
             messages.push(Success::generated_message_descriptor_data());
             messages.push(Failure::generated_message_descriptor_data());
             messages.push(ButtonRequest::generated_message_descriptor_data());
@@ -4928,8 +5617,12 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(PaymentRequest::generated_message_descriptor_data());
             messages.push(ShrincsSign::generated_message_descriptor_data());
             messages.push(ShrincsSignature::generated_message_descriptor_data());
+            messages.push(ShrincsKeyGen::generated_message_descriptor_data());
+            messages.push(ShrincsSk::generated_message_descriptor_data());
             messages.push(SlhDsaSign::generated_message_descriptor_data());
             messages.push(SlhDsaSignature::generated_message_descriptor_data());
+            messages.push(SlhDsaKeyGen::generated_message_descriptor_data());
+            messages.push(SlhDsaSk::generated_message_descriptor_data());
             messages.push(payment_request::PaymentRequestMemo::generated_message_descriptor_data());
             messages.push(payment_request::TextMemo::generated_message_descriptor_data());
             messages.push(payment_request::TextDetailsMemo::generated_message_descriptor_data());

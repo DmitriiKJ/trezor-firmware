@@ -710,5 +710,9 @@ if TYPE_CHECKING:
         Telemetry = 1101
         ShrincsSign = 1102
         ShrincsSignature = 1103
+        ShrincsKeyGen = 1106
+        ShrincsSk = 1107
         SlhDsaSign = 1104
         SlhDsaSignature = 1105
+        SlhDsaKeyGen = 1108
+        SlhDsaSk = 1109

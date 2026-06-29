@@ -769,8 +769,12 @@ class MessageType(IntEnum):
     Telemetry = 1101
     ShrincsSign = 1102
     ShrincsSignature = 1103
+    ShrincsKeyGen = 1106
+    ShrincsSk = 1107
     SlhDsaSign = 1104
     SlhDsaSignature = 1105
+    SlhDsaKeyGen = 1108
+    SlhDsaSk = 1109
 
 
 class BenchmarkListNames(protobuf.MessageType):
@@ -1049,24 +1053,52 @@ class ShrincsSignature(protobuf.MessageType):
         self.signature = signature
 
 
+class ShrincsKeyGen(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1106
+    FIELDS = {
+        1: protobuf.Field("bytes", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        bytes: "bytes",
+    ) -> None:
+        self.bytes = bytes
+
+
+class ShrincsSk(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1107
+    FIELDS = {
+        1: protobuf.Field("sk_bytes", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        sk_bytes: "bytes",
+    ) -> None:
+        self.sk_bytes = sk_bytes
+
+
 class SlhDsaSign(protobuf.MessageType):
     MESSAGE_WIRE_TYPE = 1104
     FIELDS = {
         1: protobuf.Field("address_n", "uint32", repeated=True, required=False, default=None),
         2: protobuf.Field("data", "bytes", repeated=False, required=True),
-        3: protobuf.Field("is_standart", "bool", repeated=False, required=True),
+        3: protobuf.Field("is_standard", "bool", repeated=False, required=True),
     }
 
     def __init__(
         self,
         *,
         data: "bytes",
-        is_standart: "bool",
+        is_standard: "bool",
         address_n: Optional[Sequence["int"]] = None,
     ) -> None:
         self.address_n: Sequence["int"] = address_n if address_n is not None else []
         self.data = data
-        self.is_standart = is_standart
+        self.is_standard = is_standard
 
 
 class SlhDsaSignature(protobuf.MessageType):
@@ -1081,6 +1113,37 @@ class SlhDsaSignature(protobuf.MessageType):
         signature: "bytes",
     ) -> None:
         self.signature = signature
+
+
+class SlhDsaKeyGen(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1108
+    FIELDS = {
+        1: protobuf.Field("bytes", "bytes", repeated=False, required=True),
+        2: protobuf.Field("is_standard", "bool", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        bytes: "bytes",
+        is_standard: "bool",
+    ) -> None:
+        self.bytes = bytes
+        self.is_standard = is_standard
+
+
+class SlhDsaSk(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1109
+    FIELDS = {
+        1: protobuf.Field("sk_bytes", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        sk_bytes: "bytes",
+    ) -> None:
+        self.sk_bytes = sk_bytes
 
 
 class PaymentRequestMemo(protobuf.MessageType):

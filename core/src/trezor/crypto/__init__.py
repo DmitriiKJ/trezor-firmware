@@ -10,7 +10,7 @@ from trezorcrypto import (  # noqa: F401
 )
 
 from trezorcrypto import shrincs_sign_stateless, shrincs_sign_stateful, shrincs_expand_sk
-from trezorcrypto import slh_dsa_sign
+from trezorcrypto import slh_dsa_sign, slh_dsa_gen_sk
 
 try:
     from trezorcrypto import aesgcm  # noqa: F401
