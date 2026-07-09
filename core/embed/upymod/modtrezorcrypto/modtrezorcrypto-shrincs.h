@@ -11,23 +11,22 @@ STATIC mp_obj_t mod_trezorcrypto_shrincs_expand_sk(mp_obj_t seckey_32) {
     uint8_t sha512_buf[64];
     sha512_Raw((const uint8_t*)buf_32.buf, 32, sha512_buf);
 
-    PublicKey pk;
-    SecretKey sk;
-    State state;
-    shrincs_restore(sha512_buf, &pk, &sk, &state);
+    uint8_t adrs[32] = {0};
 
-    uint8_t out_sk_bytes[96];
-    memcpy(out_sk_bytes,         sk.seed,    N);
-    memcpy(out_sk_bytes + N,     sk.prf,     N);
-    memcpy(out_sk_bytes + N*2,   sk.sf,      N);
-    memcpy(out_sk_bytes + N*3,   sk.sl,      N);
-    memcpy(out_sk_bytes + N*4,   sk.pk.seed, N);
-    memcpy(out_sk_bytes + N*5,   sk.pk.root, N);
+    SHA256_CTX hash_ctx;
+    sha256_Init(&hash_ctx);
+
+    sha256_add_to_ctx(&hash_ctx, sha512_buf + 2*N, N);
+    // Add zeros
+    sha256_add_to_ctx(&hash_ctx, adrs, 32);
+    sha256_add_to_ctx(&hash_ctx, adrs, 16);
+    
+    uint8_t pk_sf[N]; 
+    uxmss_root(sha512_buf, &hash_ctx, adrs, pk_sf);
 
     memzero(sha512_buf, sizeof(sha512_buf));
-    memzero(&sk, sizeof(sk));
 
-    return mp_obj_new_bytes(out_sk_bytes, sizeof(out_sk_bytes));
+    return mp_obj_new_bytes(pk_sf, sizeof(pk_sf));
 }
 MP_DEFINE_CONST_FUN_OBJ_1(mod_trezorcrypto_shrincs_expand_sk_obj, mod_trezorcrypto_shrincs_expand_sk);
 
