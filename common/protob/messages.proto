@@ -395,4 +395,10 @@ enum MessageType {
     MessageType_SlhDsaSignature = 1105 [(wire_out) = true];
     MessageType_SlhDsaKeyGen    = 1108 [(wire_in) = true];
     MessageType_SlhDsaSk        = 1109 [(wire_out) = true];
+
+    // XMSS
+    MessageType_XMSSSign     = 1110 [(wire_in) = true];
+    MessageType_XMSSSignature = 1111 [(wire_out) = true];
+    MessageType_XMSSKeyGen    = 1112 [(wire_in) = true];
+    MessageType_XMSSSk        = 1113 [(wire_out) = true];
 }

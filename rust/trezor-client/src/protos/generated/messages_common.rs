@@ -5495,6 +5495,671 @@ impl ::protobuf::reflect::ProtobufValue for SlhDsaSk {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
+// @@protoc_insertion_point(message:hw.trezor.messages.common.XMSSSign)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct XMSSSign {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.XMSSSign.address_n)
+    pub address_n: ::std::vec::Vec<u32>,
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.XMSSSign.data)
+    pub data: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.XMSSSign.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a XMSSSign {
+    fn default() -> &'a XMSSSign {
+        <XMSSSign as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl XMSSSign {
+    pub fn new() -> XMSSSign {
+        ::std::default::Default::default()
+    }
+
+    // required bytes data = 2;
+
+    pub fn data(&self) -> &[u8] {
+        match self.data.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_data(&mut self) {
+        self.data = ::std::option::Option::None;
+    }
+
+    pub fn has_data(&self) -> bool {
+        self.data.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_data(&mut self, v: ::std::vec::Vec<u8>) {
+        self.data = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_data(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.data.is_none() {
+            self.data = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.data.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_data(&mut self) -> ::std::vec::Vec<u8> {
+        self.data.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+            "address_n",
+            |m: &XMSSSign| { &m.address_n },
+            |m: &mut XMSSSign| { &mut m.address_n },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "data",
+            |m: &XMSSSign| { &m.data },
+            |m: &mut XMSSSign| { &mut m.data },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<XMSSSign>(
+            "XMSSSign",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for XMSSSign {
+    const NAME: &'static str = "XMSSSign";
+
+    fn is_initialized(&self) -> bool {
+        if self.data.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    is.read_repeated_packed_uint32_into(&mut self.address_n)?;
+                },
+                8 => {
+                    self.address_n.push(is.read_uint32()?);
+                },
+                18 => {
+                    self.data = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        for value in &self.address_n {
+            my_size += ::protobuf::rt::uint32_size(1, *value);
+        };
+        if let Some(v) = self.data.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(2, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        for v in &self.address_n {
+            os.write_uint32(1, *v)?;
+        };
+        if let Some(v) = self.data.as_ref() {
+            os.write_bytes(2, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> XMSSSign {
+        XMSSSign::new()
+    }
+
+    fn clear(&mut self) {
+        self.address_n.clear();
+        self.data = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static XMSSSign {
+        static instance: XMSSSign = XMSSSign {
+            address_n: ::std::vec::Vec::new(),
+            data: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for XMSSSign {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("XMSSSign").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for XMSSSign {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for XMSSSign {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hw.trezor.messages.common.XMSSSignature)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct XMSSSignature {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.XMSSSignature.signature)
+    pub signature: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.XMSSSignature.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a XMSSSignature {
+    fn default() -> &'a XMSSSignature {
+        <XMSSSignature as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl XMSSSignature {
+    pub fn new() -> XMSSSignature {
+        ::std::default::Default::default()
+    }
+
+    // required bytes signature = 1;
+
+    pub fn signature(&self) -> &[u8] {
+        match self.signature.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_signature(&mut self) {
+        self.signature = ::std::option::Option::None;
+    }
+
+    pub fn has_signature(&self) -> bool {
+        self.signature.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_signature(&mut self, v: ::std::vec::Vec<u8>) {
+        self.signature = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_signature(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.signature.is_none() {
+            self.signature = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.signature.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_signature(&mut self) -> ::std::vec::Vec<u8> {
+        self.signature.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "signature",
+            |m: &XMSSSignature| { &m.signature },
+            |m: &mut XMSSSignature| { &mut m.signature },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<XMSSSignature>(
+            "XMSSSignature",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for XMSSSignature {
+    const NAME: &'static str = "XMSSSignature";
+
+    fn is_initialized(&self) -> bool {
+        if self.signature.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.signature = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.signature.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(1, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.signature.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> XMSSSignature {
+        XMSSSignature::new()
+    }
+
+    fn clear(&mut self) {
+        self.signature = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static XMSSSignature {
+        static instance: XMSSSignature = XMSSSignature {
+            signature: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for XMSSSignature {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("XMSSSignature").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for XMSSSignature {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for XMSSSignature {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hw.trezor.messages.common.XMSSKeyGen)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct XMSSKeyGen {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.XMSSKeyGen.bytes)
+    pub bytes: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.XMSSKeyGen.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a XMSSKeyGen {
+    fn default() -> &'a XMSSKeyGen {
+        <XMSSKeyGen as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl XMSSKeyGen {
+    pub fn new() -> XMSSKeyGen {
+        ::std::default::Default::default()
+    }
+
+    // required bytes bytes = 1;
+
+    pub fn bytes(&self) -> &[u8] {
+        match self.bytes.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_bytes(&mut self) {
+        self.bytes = ::std::option::Option::None;
+    }
+
+    pub fn has_bytes(&self) -> bool {
+        self.bytes.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_bytes(&mut self, v: ::std::vec::Vec<u8>) {
+        self.bytes = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_bytes(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.bytes.is_none() {
+            self.bytes = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.bytes.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_bytes(&mut self) -> ::std::vec::Vec<u8> {
+        self.bytes.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "bytes",
+            |m: &XMSSKeyGen| { &m.bytes },
+            |m: &mut XMSSKeyGen| { &mut m.bytes },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<XMSSKeyGen>(
+            "XMSSKeyGen",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for XMSSKeyGen {
+    const NAME: &'static str = "XMSSKeyGen";
+
+    fn is_initialized(&self) -> bool {
+        if self.bytes.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.bytes = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.bytes.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(1, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.bytes.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> XMSSKeyGen {
+        XMSSKeyGen::new()
+    }
+
+    fn clear(&mut self) {
+        self.bytes = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static XMSSKeyGen {
+        static instance: XMSSKeyGen = XMSSKeyGen {
+            bytes: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for XMSSKeyGen {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("XMSSKeyGen").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for XMSSKeyGen {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for XMSSKeyGen {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:hw.trezor.messages.common.XMSSSk)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct XMSSSk {
+    // message fields
+    // @@protoc_insertion_point(field:hw.trezor.messages.common.XMSSSk.sk_bytes)
+    pub sk_bytes: ::std::option::Option<::std::vec::Vec<u8>>,
+    // special fields
+    // @@protoc_insertion_point(special_field:hw.trezor.messages.common.XMSSSk.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a XMSSSk {
+    fn default() -> &'a XMSSSk {
+        <XMSSSk as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl XMSSSk {
+    pub fn new() -> XMSSSk {
+        ::std::default::Default::default()
+    }
+
+    // required bytes sk_bytes = 1;
+
+    pub fn sk_bytes(&self) -> &[u8] {
+        match self.sk_bytes.as_ref() {
+            Some(v) => v,
+            None => &[],
+        }
+    }
+
+    pub fn clear_sk_bytes(&mut self) {
+        self.sk_bytes = ::std::option::Option::None;
+    }
+
+    pub fn has_sk_bytes(&self) -> bool {
+        self.sk_bytes.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_sk_bytes(&mut self, v: ::std::vec::Vec<u8>) {
+        self.sk_bytes = ::std::option::Option::Some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_sk_bytes(&mut self) -> &mut ::std::vec::Vec<u8> {
+        if self.sk_bytes.is_none() {
+            self.sk_bytes = ::std::option::Option::Some(::std::vec::Vec::new());
+        }
+        self.sk_bytes.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_sk_bytes(&mut self) -> ::std::vec::Vec<u8> {
+        self.sk_bytes.take().unwrap_or_else(|| ::std::vec::Vec::new())
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_option_accessor::<_, _>(
+            "sk_bytes",
+            |m: &XMSSSk| { &m.sk_bytes },
+            |m: &mut XMSSSk| { &mut m.sk_bytes },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<XMSSSk>(
+            "XMSSSk",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for XMSSSk {
+    const NAME: &'static str = "XMSSSk";
+
+    fn is_initialized(&self) -> bool {
+        if self.sk_bytes.is_none() {
+            return false;
+        }
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                10 => {
+                    self.sk_bytes = ::std::option::Option::Some(is.read_bytes()?);
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if let Some(v) = self.sk_bytes.as_ref() {
+            my_size += ::protobuf::rt::bytes_size(1, &v);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if let Some(v) = self.sk_bytes.as_ref() {
+            os.write_bytes(1, v)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> XMSSSk {
+        XMSSSk::new()
+    }
+
+    fn clear(&mut self) {
+        self.sk_bytes = ::std::option::Option::None;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static XMSSSk {
+        static instance: XMSSSk = XMSSSk {
+            sk_bytes: ::std::option::Option::None,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for XMSSSk {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("XMSSSk").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for XMSSSk {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for XMSSSk {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
 static file_descriptor_proto_data: &'static [u8] = b"\
     \n\x15messages-common.proto\x12\x19hw.trezor.messages.common\x1a\roption\
     s.proto\"%\n\x07Success\x12\x1a\n\x07message\x18\x01\x20\x01(\t:\0R\x07m\
@@ -5582,8 +6247,12 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x02(\x0cR\tsignature\"E\n\x0cSlhDsaKeyGen\x12\x14\n\x05bytes\x18\x01\
     \x20\x02(\x0cR\x05bytes\x12\x1f\n\x0bis_standard\x18\x02\x20\x02(\x08R\n\
     isStandard\"%\n\x08SlhDsaSk\x12\x19\n\x08sk_bytes\x18\x01\x20\x02(\x0cR\
-    \x07skBytesB>\n#com.satoshilabs.trezor.lib.protobufB\x13TrezorMessageCom\
-    mon\x80\xa6\x1d\x01\
+    \x07skBytes\";\n\x08XMSSSign\x12\x1b\n\taddress_n\x18\x01\x20\x03(\rR\
+    \x08addressN\x12\x12\n\x04data\x18\x02\x20\x02(\x0cR\x04data\"-\n\rXMSSS\
+    ignature\x12\x1c\n\tsignature\x18\x01\x20\x02(\x0cR\tsignature\"\"\n\nXM\
+    SSKeyGen\x12\x14\n\x05bytes\x18\x01\x20\x02(\x0cR\x05bytes\"#\n\x06XMSSS\
+    k\x12\x19\n\x08sk_bytes\x18\x01\x20\x02(\x0cR\x07skBytesB>\n#com.satoshi\
+    labs.trezor.lib.protobufB\x13TrezorMessageCommon\x80\xa6\x1d\x01\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -5602,7 +6271,7 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
         let generated_file_descriptor = generated_file_descriptor_lazy.get(|| {
             let mut deps = ::std::vec::Vec::with_capacity(1);
             deps.push(super::options::file_descriptor().clone());
-            let mut messages = ::std::vec::Vec::with_capacity(25);
+            let mut messages = ::std::vec::Vec::with_capacity(29);
             messages.push(Success::generated_message_descriptor_data());
             messages.push(Failure::generated_message_descriptor_data());
             messages.push(ButtonRequest::generated_message_descriptor_data());
@@ -5623,6 +6292,10 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(SlhDsaSignature::generated_message_descriptor_data());
             messages.push(SlhDsaKeyGen::generated_message_descriptor_data());
             messages.push(SlhDsaSk::generated_message_descriptor_data());
+            messages.push(XMSSSign::generated_message_descriptor_data());
+            messages.push(XMSSSignature::generated_message_descriptor_data());
+            messages.push(XMSSKeyGen::generated_message_descriptor_data());
+            messages.push(XMSSSk::generated_message_descriptor_data());
             messages.push(payment_request::PaymentRequestMemo::generated_message_descriptor_data());
             messages.push(payment_request::TextMemo::generated_message_descriptor_data());
             messages.push(payment_request::TextDetailsMemo::generated_message_descriptor_data());

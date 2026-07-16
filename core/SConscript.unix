@@ -199,6 +199,16 @@ SOURCE_MOD_CRYPTO += [
     'vendor/trezor-crypto/slh_dsa/slh_dsa.c',
     'vendor/trezor-crypto/slh_dsa/slh_prehash.c',
     'vendor/trezor-crypto/slh_dsa/slh_sha2.c',
+    'vendor/trezor-crypto/xmss/fips202.c',
+    'vendor/trezor-crypto/xmss/hash_address.c',
+    'vendor/trezor-crypto/xmss/hash.c',
+    'vendor/trezor-crypto/xmss/params.c',
+    'vendor/trezor-crypto/xmss/randombytes.c',
+    'vendor/trezor-crypto/xmss/utils.c',
+    'vendor/trezor-crypto/xmss/wots.c',
+    'vendor/trezor-crypto/xmss/xmss_commons.c',
+    'vendor/trezor-crypto/xmss/xmss_core.c',
+    'vendor/trezor-crypto/xmss/xmss.c',
 ]
 if EVERYTHING:
     SOURCE_MOD_CRYPTO += [

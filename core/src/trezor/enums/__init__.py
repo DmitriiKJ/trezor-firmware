@@ -716,3 +716,7 @@ if TYPE_CHECKING:
         SlhDsaSignature = 1105
         SlhDsaKeyGen = 1108
         SlhDsaSk = 1109
+        XMSSSign = 1110
+        XMSSSignature = 1111
+        XMSSKeyGen = 1112
+        XMSSSk = 1113

@@ -401,6 +401,64 @@ if TYPE_CHECKING:
         def is_type_of(cls, msg: Any) -> TypeGuard["SlhDsaSk"]:
             return isinstance(msg, cls)
 
+    class XMSSSign(protobuf.MessageType):
+        address_n: "list[int]"
+        data: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            data: "AnyBytes",
+            address_n: "list[int] | None" = None,
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["XMSSSign"]:
+            return isinstance(msg, cls)
+
+    class XMSSSignature(protobuf.MessageType):
+        signature: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            signature: "AnyBytes",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["XMSSSignature"]:
+            return isinstance(msg, cls)
+
+    class XMSSKeyGen(protobuf.MessageType):
+        bytes: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            bytes: "AnyBytes",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["XMSSKeyGen"]:
+            return isinstance(msg, cls)
+
+    class XMSSSk(protobuf.MessageType):
+        sk_bytes: "AnyBytes"
+
+        def __init__(
+            self,
+            *,
+            sk_bytes: "AnyBytes",
+        ) -> None:
+            pass
+
+        @classmethod
+        def is_type_of(cls, msg: Any) -> TypeGuard["XMSSSk"]:
+            return isinstance(msg, cls)
+
     class PaymentRequestMemo(protobuf.MessageType):
         text_memo: "TextMemo | None"
         refund_memo: "RefundMemo | None"

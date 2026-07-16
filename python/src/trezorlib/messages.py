@@ -775,6 +775,10 @@ class MessageType(IntEnum):
     SlhDsaSignature = 1105
     SlhDsaKeyGen = 1108
     SlhDsaSk = 1109
+    XMSSSign = 1110
+    XMSSSignature = 1111
+    XMSSKeyGen = 1112
+    XMSSSk = 1113
 
 
 class BenchmarkListNames(protobuf.MessageType):
@@ -1134,6 +1138,65 @@ class SlhDsaKeyGen(protobuf.MessageType):
 
 class SlhDsaSk(protobuf.MessageType):
     MESSAGE_WIRE_TYPE = 1109
+    FIELDS = {
+        1: protobuf.Field("sk_bytes", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        sk_bytes: "bytes",
+    ) -> None:
+        self.sk_bytes = sk_bytes
+
+
+class XMSSSign(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1110
+    FIELDS = {
+        1: protobuf.Field("address_n", "uint32", repeated=True, required=False, default=None),
+        2: protobuf.Field("data", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        data: "bytes",
+        address_n: Optional[Sequence["int"]] = None,
+    ) -> None:
+        self.address_n: Sequence["int"] = address_n if address_n is not None else []
+        self.data = data
+
+
+class XMSSSignature(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1111
+    FIELDS = {
+        1: protobuf.Field("signature", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        signature: "bytes",
+    ) -> None:
+        self.signature = signature
+
+
+class XMSSKeyGen(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1112
+    FIELDS = {
+        1: protobuf.Field("bytes", "bytes", repeated=False, required=True),
+    }
+
+    def __init__(
+        self,
+        *,
+        bytes: "bytes",
+    ) -> None:
+        self.bytes = bytes
+
+
+class XMSSSk(protobuf.MessageType):
+    MESSAGE_WIRE_TYPE = 1113
     FIELDS = {
         1: protobuf.Field("sk_bytes", "bytes", repeated=False, required=True),
     }

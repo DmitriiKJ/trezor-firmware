@@ -114,6 +114,10 @@ trezor_message_impl! {
     SlhDsaSignature => MessageType_SlhDsaSignature,
     SlhDsaKeyGen => MessageType_SlhDsaKeyGen,
     SlhDsaSk => MessageType_SlhDsaSk,
+    XMSSSign => MessageType_XMSSSign,
+    XMSSSignature => MessageType_XMSSSignature,
+    XMSSKeyGen => MessageType_XMSSKeyGen,
+    XMSSSk => MessageType_XMSSSk,
 }
 
 #[cfg(feature = "bitcoin")]

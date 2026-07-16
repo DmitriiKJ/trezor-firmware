@@ -260,3 +260,20 @@ message SlhDsaKeyGen {
 message SlhDsaSk {
     required bytes sk_bytes = 1;
 }
+
+message XMSSSign {
+    repeated uint32 address_n = 1; 
+    required bytes data = 2;
+}
+
+message XMSSSignature {
+    required bytes signature = 1;
+}
+
+message XMSSKeyGen {
+    required bytes bytes = 1;
+}
+
+message XMSSSk {
+    required bytes sk_bytes = 1;
+}

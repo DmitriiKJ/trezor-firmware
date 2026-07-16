@@ -144,6 +144,7 @@ OBJS  += precomputed_ecmult.o
 OBJS  += precomputed_ecmult_gen.o
 OBJS += shrincs/shrincs.o shrincs/hash.o shrincs/address.o shrincs/pors_fp.o shrincs/uxmss.o shrincs/wots_c.o shrincs/xmss.o
 OBJS += slh_dsa/sha2_256.o slh_dsa/sha2_512.o slh_dsa/sha3_api.o slh_dsa/sha3_f1600.o slh_dsa/slh_dsa.o slh_dsa/slh_prehash.o slh_dsa/slh_sha2.o slh_dsa/slh_shake.o
+OBJS += xmss/fips202.o xmss/hash_address.o xmss/hash.o xmss/params.o xmss/randombytes.o xmss/utils.o xmss/wots.o xmss/xmss_commons.o xmss/xmss_core.o xmss/xmss.o
 
 TESTLIBS = $(shell pkg-config --libs check) -lpthread -lm
 TESTSSLLIBS = $(shell pkg-config --libs openssl)
@@ -205,6 +206,8 @@ clean:
 	rm -f fuzzer/*.o fuzzer/fuzzer
 	rm -f secp256k1-zkp.o precomputed_ecmult.o precomputed_ecmult_gen.o
 	rm -f shrincs/*.o
+	rm -f slh_dsa/*.o
+	rm -f xmss/*.o
 
 clean-fuzzer: clean
 	rm -f crash-* fuzz-*.log slow-unit-* timeout-*

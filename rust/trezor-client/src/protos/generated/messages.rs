@@ -615,6 +615,14 @@ pub enum MessageType {
     MessageType_SlhDsaKeyGen = 1108,
     // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_SlhDsaSk)
     MessageType_SlhDsaSk = 1109,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_XMSSSign)
+    MessageType_XMSSSign = 1110,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_XMSSSignature)
+    MessageType_XMSSSignature = 1111,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_XMSSKeyGen)
+    MessageType_XMSSKeyGen = 1112,
+    // @@protoc_insertion_point(enum_value:hw.trezor.messages.MessageType.MessageType_XMSSSk)
+    MessageType_XMSSSk = 1113,
 }
 
 impl ::protobuf::Enum for MessageType {
@@ -920,6 +928,10 @@ impl ::protobuf::Enum for MessageType {
             1105 => ::std::option::Option::Some(MessageType::MessageType_SlhDsaSignature),
             1108 => ::std::option::Option::Some(MessageType::MessageType_SlhDsaKeyGen),
             1109 => ::std::option::Option::Some(MessageType::MessageType_SlhDsaSk),
+            1110 => ::std::option::Option::Some(MessageType::MessageType_XMSSSign),
+            1111 => ::std::option::Option::Some(MessageType::MessageType_XMSSSignature),
+            1112 => ::std::option::Option::Some(MessageType::MessageType_XMSSKeyGen),
+            1113 => ::std::option::Option::Some(MessageType::MessageType_XMSSSk),
             _ => ::std::option::Option::None
         }
     }
@@ -1220,6 +1232,10 @@ impl ::protobuf::Enum for MessageType {
             "MessageType_SlhDsaSignature" => ::std::option::Option::Some(MessageType::MessageType_SlhDsaSignature),
             "MessageType_SlhDsaKeyGen" => ::std::option::Option::Some(MessageType::MessageType_SlhDsaKeyGen),
             "MessageType_SlhDsaSk" => ::std::option::Option::Some(MessageType::MessageType_SlhDsaSk),
+            "MessageType_XMSSSign" => ::std::option::Option::Some(MessageType::MessageType_XMSSSign),
+            "MessageType_XMSSSignature" => ::std::option::Option::Some(MessageType::MessageType_XMSSSignature),
+            "MessageType_XMSSKeyGen" => ::std::option::Option::Some(MessageType::MessageType_XMSSKeyGen),
+            "MessageType_XMSSSk" => ::std::option::Option::Some(MessageType::MessageType_XMSSSk),
             _ => ::std::option::Option::None
         }
     }
@@ -1519,6 +1535,10 @@ impl ::protobuf::Enum for MessageType {
         MessageType::MessageType_SlhDsaSignature,
         MessageType::MessageType_SlhDsaKeyGen,
         MessageType::MessageType_SlhDsaSk,
+        MessageType::MessageType_XMSSSign,
+        MessageType::MessageType_XMSSSignature,
+        MessageType::MessageType_XMSSKeyGen,
+        MessageType::MessageType_XMSSSk,
     ];
 }
 
@@ -1824,6 +1844,10 @@ impl ::protobuf::EnumFull for MessageType {
             MessageType::MessageType_SlhDsaSignature => 291,
             MessageType::MessageType_SlhDsaKeyGen => 292,
             MessageType::MessageType_SlhDsaSk => 293,
+            MessageType::MessageType_XMSSSign => 294,
+            MessageType::MessageType_XMSSSignature => 295,
+            MessageType::MessageType_XMSSKeyGen => 296,
+            MessageType::MessageType_XMSSSk => 297,
         };
         Self::enum_descriptor().value_by_index(index)
     }
@@ -1842,7 +1866,7 @@ impl MessageType {
 }
 
 static file_descriptor_proto_data: &'static [u8] = b"\
-    \n\x0emessages.proto\x12\x12hw.trezor.messages\x1a\roptions.proto*\xe4f\
+    \n\x0emessages.proto\x12\x12hw.trezor.messages\x1a\roptions.proto*\xedg\
     \n\x0bMessageType\x12(\n\x16MessageType_Initialize\x10\0\x1a\x0c\xb0\xb5\
     \x18\x01\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12\x1e\n\x10MessageType_Ping\
     \x10\x01\x1a\x08\x80\xa6\x1d\x01\x90\xb5\x18\x01\x12%\n\x13MessageType_S\
@@ -2178,13 +2202,16 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     SlhDsaSign\x10\xd0\x08\x1a\x04\x90\xb5\x18\x01\x12&\n\x1bMessageType_Slh\
     DsaSignature\x10\xd1\x08\x1a\x04\x98\xb5\x18\x01\x12#\n\x18MessageType_S\
     lhDsaKeyGen\x10\xd4\x08\x1a\x04\x90\xb5\x18\x01\x12\x1f\n\x14MessageType\
-    _SlhDsaSk\x10\xd5\x08\x1a\x04\x98\xb5\x18\x01\x1a\x08\xc8\xf3\x18\x01\
-    \xd0\xf3\x18\x01\"\x04\x08Z\x10\\\"\x04\x08G\x10J\"\x04\x08r\x10z\"\x05\
-    \x08{\x10\x95\x01\"\x06\x08\xdb\x01\x10\xdb\x01\"\x06\x08\xe0\x01\x10\
-    \xe0\x01\"\x06\x08\xac\x02\x10\xb0\x02\"\x06\x08\xb5\x02\x10\xb8\x02\"\
-    \x06\x08\xbc\x05\x10\xc5\x05\"\x06\x08\xe9\x07\x10\xf7\x07\"\x06\x08\xfa\
-    \x07\x10\xcb\x08B8\n#com.satoshilabs.trezor.lib.protobufB\rTrezorMessage\
-    \x80\xa6\x1d\x01\
+    _SlhDsaSk\x10\xd5\x08\x1a\x04\x98\xb5\x18\x01\x12\x1f\n\x14MessageType_X\
+    MSSSign\x10\xd6\x08\x1a\x04\x90\xb5\x18\x01\x12$\n\x19MessageType_XMSSSi\
+    gnature\x10\xd7\x08\x1a\x04\x98\xb5\x18\x01\x12!\n\x16MessageType_XMSSKe\
+    yGen\x10\xd8\x08\x1a\x04\x90\xb5\x18\x01\x12\x1d\n\x12MessageType_XMSSSk\
+    \x10\xd9\x08\x1a\x04\x98\xb5\x18\x01\x1a\x08\xc8\xf3\x18\x01\xd0\xf3\x18\
+    \x01\"\x04\x08Z\x10\\\"\x04\x08G\x10J\"\x04\x08r\x10z\"\x05\x08{\x10\x95\
+    \x01\"\x06\x08\xdb\x01\x10\xdb\x01\"\x06\x08\xe0\x01\x10\xe0\x01\"\x06\
+    \x08\xac\x02\x10\xb0\x02\"\x06\x08\xb5\x02\x10\xb8\x02\"\x06\x08\xbc\x05\
+    \x10\xc5\x05\"\x06\x08\xe9\x07\x10\xf7\x07\"\x06\x08\xfa\x07\x10\xcb\x08\
+    B8\n#com.satoshilabs.trezor.lib.protobufB\rTrezorMessage\x80\xa6\x1d\x01\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
